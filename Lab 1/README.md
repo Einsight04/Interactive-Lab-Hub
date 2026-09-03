@@ -3,11 +3,13 @@
 _This project is to be done in teams of 2._
 
 **NAME OF BOTH COLLABORATOR(S) HERE**
-Elliot Waxman
-Ghaith Khalil
+
+- Elliot Waxman
+- Ghaith Khalil
 
 **THE MASTERWORK YOU DREW FROM THE HAT:**
 Project Blinkenlights
+
 ---
 
 One way to understand greatness is to look to the greats. Just as painters learn
