@@ -125,15 +125,15 @@ and the people around it. If you're new to storyboarding, read
 
 Three storyboards, drawn in order as the idea changed.
 
-**Storyboard 1 — Pong (the original).** How Blinkenlights actually worked in 2001: a passer-by dials the number, moves a paddle with the keypad, and the building answers. This is what we set out to recreate.
+**Storyboard 1: Pong (the original).** How Blinkenlights actually worked in 2001: a passer-by dials the number, moves a paddle with the keypad, and the building answers. This is what we set out to recreate.
 
 ![Storyboard 1: Dial, Pong, Game End](images/storyboard-1.png)
 
-**Storyboard 2 — Text (what we built).** Once we had a working pixel grid, texting turned out to be the interaction that made the most sense for a line at a pop-up restaurant. The key moment is not the sender's phone but the stranger next to them looking up at the grid, and then replying.
+**Storyboard 2: Text (what we built).** Once we had a working pixel grid, texting turned out to be the interaction that made the most sense for a line at a pop-up restaurant. The key moment is not the sender's phone but the stranger next to them looking up at the grid, and then replying.
 
 ![Storyboard 2: Text, Show, Reply](images/storyboard-2.png)
 
-**Storyboard 3 — What if (the branches).** After acting the scene out we found the moments where it could go a different way: two texts arriving at once, the grid queueing them, and what the grid does when nobody is texting at all. This one is discussed further under Part B.
+**Storyboard 3: What if (the branches).** After acting the scene out we found the moments where it could go a different way: two texts arriving at once, the grid queueing them, and what the grid does when nobody is texting at all. This one is discussed further under Part B.
 
 ![Storyboard 3: Two at once, Take turns, Idle](images/storyboard-3.png)
 
