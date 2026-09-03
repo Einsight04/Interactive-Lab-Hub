@@ -120,7 +120,20 @@ and the people around it. If you're new to storyboarding, read
 [this explanation](https://www.nngroup.com/articles/storyboards-visualize-ideas/).
 
 **Include pictures of your storyboards here.**
-![Storyboards of the Blinkenlights recreation](images/storyboard.png)
+
+Three storyboards, drawn in order as the idea changed.
+
+**Storyboard 1 — Pong (the original).** How Blinkenlights actually worked in 2001: a passer-by dials the number, moves a paddle with the keypad, and the building answers. This is what we set out to recreate.
+
+![Storyboard 1: Dial, Pong, Game End](images/storyboard-1.png)
+
+**Storyboard 2 — Text (what we built).** Once we had a working pixel grid, texting turned out to be the interaction that made the most sense for a line at a pop-up restaurant. The key moment is not the sender's phone but the stranger next to them looking up at the grid, and then replying.
+
+![Storyboard 2: Text, Show, Reply](images/storyboard-2.png)
+
+**Storyboard 3 — What if (the branches).** After acting the scene out we found the moments where it could go a different way: two texts arriving at once, the grid queueing them, and what the grid does when nobody is texting at all. This one is discussed further under Part B.
+
+![Storyboard 3: Two at once, Take turns, Idle](images/storyboard-3.png)
 
 Use the storyboards to decide what interaction to prototype.
 
@@ -138,6 +151,8 @@ it aloud.
 
 **Are there key moments in the interaction where things could go in a different direction?**
 Iterate your storyboards to capture key non-sequential aspects of the interaction. 
+
+Yes, and Storyboard 3 above ("What if") is our iteration for exactly this. Two people can text at the same moment, so the grid has to queue messages and show whose turn it is. And when nobody texts, the grid does not simply wait: it plays its own idle animations, which is a different moment from the grid answering a person. A building doing its own thing invites someone to interrupt it; a building answering someone invites a reply.
 
 ## Part C. Prototype the Light (light first!)
 
