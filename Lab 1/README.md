@@ -1,83 +1,10 @@
 # Recreating the Masters of Interactive Light
 
-_This project is to be done in teams of 2._
+**COLLABORATORS:** Elliot Waxman, Ghaith Khalil
 
-**NAME OF BOTH COLLABORATOR(S) HERE**
+**THE MASTERWORK YOU DREW FROM THE HAT:** Project Blinkenlights (Chaos Computer Club, 2001)
 
-- Elliot Waxman
-- Ghaith Khalil
-
-**THE MASTERWORK YOU DREW FROM THE HAT:**
-Project Blinkenlights
-
----
-
-One way to understand greatness is to look to the greats. Just as painters learn
-the technique and artistry of the old masters by recreating their paintings, so
-too shall we come to understand computer-mediated interaction by recreating the
-interactive masterworks of our time.
-
-This week, every team will draw a different masterwork from a hat. Some are
-conceptual pieces, some are historical works, some are modern-day products —
-but they all share one thing: **their central mode of interaction is carried by
-light.** Think of Tinker Bell in the original stage production of *Peter Pan*,
-represented by nothing more than a darting circle of light from an off-stage
-mirror. There was no actor playing Tinker Bell; she existed entirely through the
-way the other characters interacted with that light.
-
-Your job is to recreate the *interaction* of the piece you drew — not to build a
-museum-grade replica, but to stage the moment that makes it what it is. Someone
-who knows your piece should watch your recreation and recognize it instantly.
-Someone who has never heard of it should walk away understanding what it is
-famous for.
-
-You will do this using the interaction staging techniques we will use all semester: a
-storyboard, some acting, a phone standing in as a controllable light (the
-*Tinkerbelle* tool), a hidden human "wizard" driving it, a costume, and a
-recorded video.
-
-*Make sure you read all the instructions and understand the whole activity
-before starting!*
-
-## Prep
-
-To start, you will need:
-
-1. Read about Git [here](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F).
-2. Set up your own Github "Lab Hub" by forking the [Interactive-Lab-Hub repository](https://github.com/IRL-CT/Interactive-Lab-Hub). To get lab updates, simply use [GitHub's "Sync fork" button](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) when new content is available.
-
-3. Set up your `README.md` so it has your name and links to this lab. Learn to
-   format a README [here](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-4. **Draw your masterwork from the hat and write it at the top of this file.**
-   Whatever you drew is yours — lean into it.
-
-![Our masterwork draw: Project Blinkenlights](images/masterwork-draw.png)
-
-## Materials
-
-For this lab you will need:
-
-1. Paper, markers/pens, scissors
-2. A smartphone with a browser that can display a webpage (your stand-in "light")
-3. A computer to host the control webpage
-4. Found objects and materials to **costume your phone so it looks like the
-   device in your masterwork** — doll clothes, a paper lantern, a bottle, foil,
-   a cardboard shell, whatever it takes. Be resourceful.
-
-## Deliverables
-
-Submit all of the following in this lab folder of your Lab Hub, as links or
-uploaded files. **Each group member posts their own copy to their own Github repo**, even if the work is
-shared.
-
-1. A short **research write-up** of your masterwork (what it is, when, who made
-   it, and — most importantly — what the interaction is)
-2. **3 iterated storyboards** of the interaction in the masterwork
-5. A **video sketch** of your prototyped interaction
-6. Any **reflections** on the process
-
-Labs are due on Mondays. Make sure this page is linked from your main class hub
-page.
+![Our draw from the hat: Project Blinkenlights](images/masterwork-draw.png)
 
 ---
 
@@ -85,128 +12,105 @@ page.
 
 ## Part 0. Know Your Master
 
-Before you prototype anything, get intimately acquainted with the piece you
-drew. Do real research. You are looking less for trivia than for the *shape of
-the interaction*:
+In September 2001 the Chaos Computer Club, Europe's largest hacker association, celebrated its 20th birthday by turning a building into a screen. The building was the Haus des Lehrers on Alexanderplatz in Berlin. Behind each window of the top eight floors they placed a lamp, 144 lamps in total, giving an 18 by 8 pixel display that filled a whole side of the building. A computer switched every lamp on and off through a relay, so the whole facade could show animations frame by frame. It ran every night until February 2002 and became one of the best known pieces of interactive public light art.
 
-- What inputs are available to the user? What responses does the work give?
-- Who is present, and how does the piece color the relationships between them?
-- What is the piece famous for? What are its strengths and its weaknesses?
+**The core interaction:** Anyone could call a phone number and play Pong on the building against another caller, moving their paddle with the keys on their phone. People could also send their own animations and text to be shown on the facade, including love letters. The novelty was not the game itself. It was that a building the size of a city block was answering an ordinary phone in someone's hand, in front of everyone in the square.
 
-  Sometimes the details of how the interaction worked are lost in history. Try filling it in with your imagination!
+**Strengths:** It made a huge, ordinary building feel alive and responsive. The input was something everyone already carried, a phone, so there was no barrier to joining in. And because the display was public, one person's input became a shared moment for the whole square.
 
-**Describe your masterwork here, in your own words. What is the core interaction
-someone would recognize it by?**
+**Weaknesses:** Only two people could play at a time and everyone else could only watch. The resolution was tiny, so text had to scroll and detail was impossible. And the piece depended entirely on the building's owners, which is why it had a fixed end date.
 
-**Blinkenlights was a piece created by the Chaos Computer Club in honor of their 20th anniversary. It was actually 144 lamps set up behind the windows of a building's upper 8 floors to give the illusion of a screen. Each lamp was switched on and off by a relay from a computer. The core of the interaction with the piece took a few forms.** **People could call a phone number and use their keypad to play pong with another person who called in. They could also submit text or animations to be displayed on the building. In a sense the interaction is not much different from a regular game of pong or texting. However, in another sense it had the novelty of a building displaying the messages or gameplay for a larger audience.** It's almost like playing a video game with a display the size of a building! 
+**Sources:**
+- [Project Blinkenlights on Wikipedia](https://en.wikipedia.org/wiki/Project_Blinkenlights)
+- [blinkenlights.net, the project archive](http://blinkenlights.net/)
 
 ## Part A. Plan
 
-For your masterwork, reconstruct the interaction as a scene:
+- **Setting:** A long, boring line at night. Our version is a trendy pop-up restaurant, with a pixel-grid "building" visible to everyone in the line.
+- **Players:** A bored person in the line (the sender); the strangers around them in the line (the audience, who can become senders too); the building's pixel grid (the light).
+- **Activity:** Someone texts a number and their message appears on the grid for everyone in the line to see. Others in the line look up, and some text back, so the line starts talking to itself through the building. Alternatively two people in line play Pong on the grid using their phones, and the winner decides whether to swap places with the loser.
+- **Goals:** The sender wants to be seen and to kill time. The strangers want something to look at, and then want to reply. The building wants to keep everyone entertained while they wait.
 
-- **Setting:** Where and when does this interaction happen? (a jungle, a kitchen,
-  a spaceship corridor, a nightclub, a harbor at night)
-- **Players:** Who is involved? Who else is present? Think through everyone in
-  the setting, not just the primary user.
-- **Activity:** What is happening between the players and the light?
-- **Goals:** What is each player trying to do?
-
-**Describe your setting, players, activity, and goals here.**
-
-Our recreation could be played by people waiting in a tedious line perhaps. Anyone who goes to the link of our project will be able to display a pixel grid similar to Blinkenlights. Perhaps patrons waiting in a line at a trendy popup restraunt could text a number to display it to others in the line which I think would be fun. Alternatively, they could play a game with another patron in pong and the winner decides whether to switch places in line with the loser. In this game (pong), as it is played typically. A user controls a tiny vertical 'paddle' as a small pixel ball floats across the screen similar to a ping pong ball. Each player is trying to avoid the 'ball' from entering their side of the court and going past the paddle. The players can each alter the direction of the paddle (only vertically) by using the digits on their key pad (after calling the phone number.)
+### Storyboards
+**Iteration 1:** A straightforward visual of the original Blinkenlights interaction. A user calls the number on the building, plays Pong on the facade with their keypad, and the building thanks them when the game ends.<br><br>
+![storyboard_1](images/storyboard-1.png)
 
 
-Now **sketch a 3 storyboards** of the interaction you are recreating. (The number may depend on the thing you drew, but stretch your thinking!) They
-don't need to be beautiful, but they must capture and communicate not only the behavior of the light, but how it affects
-and the people around it. If you're new to storyboarding, read
-[this explanation](https://www.nngroup.com/articles/storyboards-visualize-ideas/).
+**Iteration 2:** We swapped the phone call for a text message, since that is what people in a line would actually do. The interesting moment became the stranger next to the sender looking up at the grid and texting back.<br><br>
+![storyboard_2](images/storyboard-2.png)
 
-**Include pictures of your storyboards here.**
 
-Three storyboards, drawn in order as the idea changed.
+**Iteration 3:** After acting out the scene (see Part B below) we found two situations the light has to handle: two people texting at once, and nobody texting at all. This storyboard covers both.<br><br>
+![storyboard_3](images/storyboard-3.png)
 
-**Storyboard 1: Pong (the original).** How Blinkenlights actually worked in 2001: a passer-by dials the number, moves a paddle with the keypad, and the building answers. This is what we set out to recreate.
+**Feedback we got:**
 
-![Storyboard 1: Dial, Pong, Game End](images/storyboard-1.png)
+What people liked:
+- It was a very cool, engaging interaction
+- Latency was really good, the visuals updated super fast
+- Easy to use; you can interact from any phone
+- "Very cool application, I can see the relevant factor with your masterwork, like the real-time text interaction feed"
 
-**Storyboard 2: Text (what we built).** Once we had a working pixel grid, texting turned out to be the interaction that made the most sense for a line at a pop-up restaurant. The key moment is not the sender's phone but the stranger next to them looking up at the grid, and then replying.
-
-![Storyboard 2: Text, Show, Reply](images/storyboard-2.png)
-
-**Storyboard 3: What if (the branches).** After acting the scene out we found the moments where it could go a different way: two texts arriving at once, the grid queueing them, and what the grid does when nobody is texting at all. This one is discussed further under Part B.
-
-![Storyboard 3: Two at once, Take turns, Idle](images/storyboard-3.png)
-
-Use the storyboards to decide what interaction to prototype.
-
-**Summarize the feedback you got here.**
+What could have been better:
+- Would be cool if you could make ASCII art
+- Would be fun if you could change colors or customize
+- Make the letters smaller, or somehow add a second line
+- Emojis!
 
 ## Part B. Act out the Interaction
 
-Physically act out the interaction you planned. For now, just pretend the light
-is doing what you've scripted — a person can wave a flashlight, or you can narrate
-it aloud.
+Our first run-through, acting it out before the light was working: https://youtube.com/shorts/tsh5MOguhmc?feature=share
 
-**Are there things that seemed better on paper than when acted out?**
+When we acted out the sequence, we discovered the following:
+- The moment that sells the piece is not the sender looking at their phone, it is the stranger next to them looking up at the building. We needed to keep the camera on the line, not on the phone.
+- Two people will text at the same time. On paper we had one sender and one grid; in the room, messages collided. The grid needs a queue and a way to show whose turn it is.
+- A dark building between messages looks broken, not idle. The grid should keep playing its own animations when nobody is texting, so there is always something to look up at.
+- Text on a low-resolution grid has to be short. Long messages scroll and lose the audience.
 
-**Did new ideas about the piece surface once you were on your feet?**
-
-**Are there key moments in the interaction where things could go in a different direction?**
-Iterate your storyboards to capture key non-sequential aspects of the interaction. 
-
-Yes, and Storyboard 3 above ("What if") is our iteration for exactly this. Two people can text at the same moment, so the grid has to queue messages and show whose turn it is. And when nobody texts, the grid does not simply wait: it plays its own idle animations, which is a different moment from the grid answering a person. A building doing its own thing invites someone to interrupt it; a building answering someone invites a reply.
+We used these findings to iterate on our storyboard, resulting in the final storyboard above (Iteration 3).
 
 ## Part C. Prototype the Light (light first!)
 
-Use your smartphone as the light of your device. Open the browser on your phone
-to act as the "light," and use the remote control interface on your computer to
-change that light. Code and setup instructions for the *Tinkerbelle* tool are
-[here](https://github.com/IRL-CT/tinkerbelle) (we invented this tool for
-this lab). If you hit technical trouble, a manually or remotely controlled light
-switch, dimmer, or lamp is a fine substitute.
+**We only focused on light this week; no other modalities.**
 
-**Get the light interaction working before anything else.** Your grade this week
-rides on the *light* being recognizable — the color, the rhythm, the timing, the
-way it answers a person. Only once your light interaction genuinely reads as your
-masterwork should you consider layering in a second modality (sound, vibration,
-motion). If in doubt, keep polishing the light. The other modalities are next
-week's business.
+Instead of the Tinkerbelle tool we built our own web page that turns any phone or laptop screen into a Blinkenlights-style pixel grid. Each cell of the grid is one "window" of the building. When someone texts the number, the message is rendered onto the grid, letter by letter, in the same blocky style as the original 18 by 8 facade. When nobody is texting, the grid plays its own idle animations. The light drives itself from the incoming texts, so there is no wizard in the loop for the basic interaction.
 
+> **TODO:** paste the link to the live pixel-grid page here.
+>
+> **TODO:** paste the link to the code (or drop the code into this folder) here.
+>
+> **TODO:** add a screenshot or photo of the grid showing a message, e.g. `images/grid-screenshot.png`.
+
+**Feedback on Tinkerbelle:** Tinkerbelle controls one light at a time from a laptop, which is right for a lamp or a watch but not for a 144-pixel building. We needed many pixels responding to text input, so it made more sense to write a small page of our own. A grid mode in Tinkerbelle, where a message or pattern drives many phones at once, would have made it usable for a piece like this.
 
 ## Part D. Wizard the Device
 
-Set up a "wizard" arrangement so one person can secretly drive the light while
-another acts with it — this is how you make the device feel alive without
-building any real electronics. (Zoom works well for recording; you can pin the
-video feed of whichever scene you want to capture.)
+Our system drives the light directly from texts, so the first prototype did not need a wizard. To compare, we also staged a wizarded version: one of us hid off camera and drove the grid by hand from the laptop, while the other acted the scene with the phone in the line. We recorded over Zoom.
 
-**Include your first attempts at recording the wizarded set-up here.**
+> **TODO:** paste the link to the wizarded run-through video here.
 
-## Part E. (optional) Costume the Device
+What the comparison showed: the wizard could improvise, for example answering an unexpected message with an animation the real system does not have. The real system was faster and never missed a cue, but it can only do what we coded.
 
-Only now should you worry about what the device looks like. Costume your phone so it reads
-as the object from your masterwork — HAL's eye, a Simon shell, a paper-lantern
-Tinker Bell, an Ambient Orb, a lighthouse, a jack-o'-lantern, whatever you drew.
+## Part E. Costume the Device
 
-Think about the world your device lives in: could that environment overheat it?
-Is water a danger? Does it need to be loud and bright for an emergency, or quiet
-and calm for a bedroom?
+> **TODO:** if you costumed the phone as a building (cardboard shell with cut-out windows, for example), add a photo here as `images/costume.png` and a sentence on why. If not, delete this section's TODO and write "We did not costume the device this week."
 
-**Include sketches/photos of what your device might look like here.**
-
-**What concerns or opportunities shaped the way you designed its look?**
+**Concerns/opportunities in shaping the look:** The grid has to read as a building at a glance, so the cells should look like windows and the whole thing should stand upright, like a facade. It also has to be bright enough to be seen from the back of a line at night.
 
 ## Part F. Record
 
-**Record your prototyped interaction as a video sketch.** Aim for the bar from
-the top of this lab: a viewer who knows the piece should recognize it; a viewer
-who doesn't should come away understanding what it's famous for. How might you illustrate the non-sequential aspects of the interaction in the sketch?
+**Video Sketch:** https://youtube.com/shorts/RPhKJcqeU8U?feature=share
 
-**Include your video here.**
+**Our aim:** A viewer who knows Blinkenlights should recognize the building-as-screen and the phone-as-controller immediately. A viewer who has never heard of it should come away understanding that a building can answer an ordinary phone in someone's hand, and that the fun is in everyone around seeing it happen. We tested it with three people who had not seen the project before, each texting the grid in turn.
 
-**Please indicate who you collaborated with on this lab.** Be generous in
-acknowledging their contributions, and credit any other influences (YouTube,
-Github, Twitter, a friend who lent you a lamp) that informed your recreation.
+> **TODO:** add one or two sentences on how the three users reacted (what they texted, what surprised them, what they tried that we did not expect).
+
+**Collaborators and influences:**
+- Elliot Waxman (TODO: role, e.g. built the grid page, acted the sender)
+- Ghaith Khalil (TODO: role, e.g. filmed, acted the stranger)
+- The Chaos Computer Club, for the original Project Blinkenlights and the archive at blinkenlights.net
+- The IRL-CT Tinkerbelle tool, which we studied before deciding to build our own grid
+- Neeha, Marisol, and the other groups who gave us feedback
 
 ---
 
@@ -221,8 +125,24 @@ videos, and give them reactions and feedback: tell them what you saw happening,
 guess the masterwork and the goals of the characters, and ask about anything that
 wasn't clear.
 
-**Who were the other groups you kibitzed with? Add links to their project pages here.**
-**Summarize the feedback you got from your partners here.**
+**Group 1: [Timex Indiglo](https://github.com/neeharavula/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** (Neeha Ravula, Marisol Park)<br>
+What we liked:
+- TODO
+What could have been better:<br>
+- TODO
+
+**Group 2: [Light-Up Sneakers](https://github.com/ga386-hash/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** (Gal Alon, Jonathan Sharpy)<br>
+What we liked:
+- The timing of the steps: the red light turning on and the footstep sound playing exactly when the shoe hits the ground
+- The rhythm of walking felt realistic
+What could have been better:<br>
+- Better animate how stepping harder makes the display brighter
+
+**Group 3: [E.T.'s Glowing Heart](https://github.com/rohilsaraf97/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** (Rohil Saraf, Aryan Palave)<br>
+What we liked:
+- TODO
+What could have been better:<br>
+- TODO
 
 ## Remix, Update, or Critique the Master
 
