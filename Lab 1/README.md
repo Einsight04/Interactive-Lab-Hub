@@ -117,8 +117,9 @@ We did not costume the device this week. We spent the time on the light itself, 
 > **TODO:** add one or two sentences on how the three users reacted (what they texted, what surprised them, what they tried that we did not expect).
 
 **Collaborators and influences:**
-- Elliot Waxman (TODO: role, e.g. built the grid page, acted the sender)
-- Ghaith Khalil (TODO: role, e.g. filmed, acted the stranger)
+- Elliot Waxman: built Pocket Blinkenlights, the grid page, the text and Pong server, the Twilio setup, and the Fly.io deployment; recorded the light test and the final video
+- Ghaith Khalil: research on the original piece, the storyboards, and this report; ran the acting-out and the user test
+- Both of us: planning the interaction, acting in the videos, and giving and collecting feedback with the other groups
 - The Chaos Computer Club, for the original Project Blinkenlights and the archive at blinkenlights.net
 - The IRL-CT Tinkerbelle tool, which we studied before deciding to build our own grid
 - Neeha, Marisol, and the other groups who gave us feedback
