@@ -22,7 +22,7 @@ In 2001 the Chaos Computer Club turned 20. They are a hacker club in Germany. To
 
 **Sources:**
 - [Project Blinkenlights on Wikipedia](https://en.wikipedia.org/wiki/Project_Blinkenlights)
-- [blinkenlights.net, the project archive](http://blinkenlights.net/)
+- [blinkenlights.net, the project site, archived copy](https://web.archive.org/web/2005/http://blinkenlights.net/)
 
 ## Part A. Plan
 
