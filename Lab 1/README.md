@@ -83,10 +83,8 @@ The light drives itself from the incoming texts and calls, so no wizard is neede
 
 **Live page:** https://pocket-blinkenlights.fly.dev (open it on a phone for the full effect)
 
-**Code:** https://github.com/Elliot-verified/blinkenlights
+**Code:** https://github.com/Einsight04/pocket-blinkenlights (public copy of Elliot's repo, full commit history)
 
-> **TODO:** the code repo is currently private, so a grader cannot open it. Either make it public or drop a copy of the code into this folder.
->
 > **TODO:** add a screenshot or photo of the grid showing a message, e.g. `images/grid-screenshot.png`.
 
 **Feedback on Tinkerbelle:** Tinkerbelle controls one light at a time from a laptop, which is right for a lamp or a watch but not for a 144-pixel building. We needed many pixels responding to text and phone input at once, so it made more sense to write a small server of our own. A grid mode in Tinkerbelle, where a message or pattern drives many pixels on one phone, would have made it usable for a piece like this.
