@@ -28,7 +28,7 @@ In 2001 the Chaos Computer Club turned 20. They are a hacker club in Germany. To
 
 - **Setting:** A long, boring line at night outside a popup restaurant. There is a pixel grid building that everyone in the line can see.
 - **Players:** A bored person in the line who sends the text. The strangers around them who watch and can text too. The building's grid of lights.
-- **Activity:** Someone texts a number and their message shows up on the grid for the whole line to see. People look up. Someone texts back. The line starts talking to itself through the building. Or two people play Pong on the grid with their phones and the winner gets to swap places in line.
+- **Activity:** Someone texts a number and their message shows up on the grid for the whole line to see. People look up. Someone texts back. The line starts talking to itself through the building.
 - **Goals:** The sender wants to be seen and to kill time. The strangers want something to look at, and then they want to reply. The building just wants to keep everyone entertained while they wait.
 
 ### Storyboards
@@ -71,15 +71,15 @@ We used these findings to iterate on our storyboard, resulting in Iteration 3 ab
 
 ## Part C. Prototype the Light (light first!)
 
-**We only focused on light this week, no other modalities.**
+**This week was almost all light.** The one thing that is not light is a short chime the display plays when a message lands. It is on by default in the code. We kept it because the original building had no sound and a silent grid changing behind you is easy to miss in a loud line.
 
-We ended up building our own thing instead of using Tinkerbelle. We call it Pocket Blinkenlights. It is a web page that turns a phone or any screen into an 18 by 8 grid of windows, the same size as the real building. Each cell is one window, on or off, like the original lamps. It takes input the same three ways the original did.
+We ended up building our own thing instead of using Tinkerbelle. We call it Pocket Blinkenlights. It is a web page that turns a phone or any screen into an 18 by 8 grid of windows, the same size as the real building. Each cell is one window, on or off, like the original lamps.
 
-- **texting:** anyone texts a real phone number and the message scrolls across the grid in a small pixel font
-- **phone keypad Pong:** two callers each get a paddle and move it with the keys on their phone
-- **submitted animations:** there is a pixel editor where anyone can draw frames for the building. Approved ones join the rotation and play whenever nobody is texting
+What we actually used is texting. Anyone texts a real phone number and the message scrolls across the grid in a 5 pixel wide font. Messages are capped at 80 characters. There is a small profanity filter and a rate limit so one person cannot hog the building. The sender gets a text back saying when their message will show up. Emojis work too, at least the ones that survive being drawn in black and white, like hearts and faces.
 
-The light drives itself from the texts and calls, so there is no wizard needed for the basic interaction. When there is no input it plays the animation archive so the building never goes dark.
+When nobody is texting, the grid plays a small set of animations we made, rain, a wave, a heartbeat and a sweep. If it ever runs out, it falls back to random windows flickering on and off like people going to bed. So the building never goes dark.
+
+The code also has phone keypad Pong and a pixel editor for submitting your own animations, since the original had both. We did not use either in our videos. The text mode is the piece.
 
 **Light working, first test:** https://youtube.com/shorts/tsh5MOguhmc?feature=share
 
@@ -106,7 +106,7 @@ What we noticed is that the wizard could improvise. If someone sent a weird text
 
 ## Part E. Costume the Device
 
-We did not costume the device this week. We spent the time on the light itself, getting texts, Pong and the idle animations all working before worrying about how it looks.
+We did not costume the device this week. We spent the time on the light itself, getting texts and the idle animations working before worrying about how it looks.
 
 **Concerns/opportunities in shaping the look:** The plan for later is a little building shell for the phone. The screen would show through cut out windows so it reads as a building and not a phone. It has to stand upright, be bright enough to see from the back of a line at night, and hide the edges of the phone. A 3D printed shell is already the next milestone in our code repo.
 
