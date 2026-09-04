@@ -73,15 +73,23 @@ We used these findings to iterate on our storyboard, resulting in the final stor
 
 **We only focused on light this week; no other modalities.**
 
-Instead of the Tinkerbelle tool we built our own web page that turns any phone or laptop screen into a Blinkenlights-style pixel grid. Each cell of the grid is one "window" of the building. When someone texts the number, the message is rendered onto the grid, letter by letter, in the same blocky style as the original 18 by 8 facade. When nobody is texting, the grid plays its own idle animations. The light drives itself from the incoming texts, so there is no wizard in the loop for the basic interaction.
+Instead of the Tinkerbelle tool we built our own: **Pocket Blinkenlights**, a phone-scale recreation of the original. A phone opens a web page that shows an 18 by 8 grid of windows, the same size as the real facade on the Haus des Lehrers. Each cell is one window, on or off, like the original relay-driven lamps. The grid is driven three ways, matching the original piece:
 
-> **TODO:** paste the link to the live pixel-grid page here.
->
-> **TODO:** paste the link to the code (or drop the code into this folder) here.
+- **Text messages.** Anyone texts a real phone number and their message scrolls across the building in a 5 by 7 pixel font.
+- **Phone-keypad Pong.** Two callers each get a paddle and move it with the keys on their phone.
+- **Submitted animations.** A pixel editor at `/submit` lets anyone draw frames for the building; approved animations join the rotation and play whenever nobody is texting or playing.
+
+The light drives itself from the incoming texts and calls, so no wizard is needed for the basic interaction. When there is no input, the scheduler plays the animation archive, so the building never goes dark.
+
+**Live page:** https://pocket-blinkenlights.fly.dev (open it on a phone for the full effect)
+
+**Code:** https://github.com/Elliot-verified/blinkenlights
+
+> **TODO:** the code repo is currently private, so a grader cannot open it. Either make it public or drop a copy of the code into this folder.
 >
 > **TODO:** add a screenshot or photo of the grid showing a message, e.g. `images/grid-screenshot.png`.
 
-**Feedback on Tinkerbelle:** Tinkerbelle controls one light at a time from a laptop, which is right for a lamp or a watch but not for a 144-pixel building. We needed many pixels responding to text input, so it made more sense to write a small page of our own. A grid mode in Tinkerbelle, where a message or pattern drives many phones at once, would have made it usable for a piece like this.
+**Feedback on Tinkerbelle:** Tinkerbelle controls one light at a time from a laptop, which is right for a lamp or a watch but not for a 144-pixel building. We needed many pixels responding to text and phone input at once, so it made more sense to write a small server of our own. A grid mode in Tinkerbelle, where a message or pattern drives many pixels on one phone, would have made it usable for a piece like this.
 
 ## Part D. Wizard the Device
 
