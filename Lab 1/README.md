@@ -98,11 +98,11 @@ The live grid, caught mid animation between messages:<br><br>
 
 ## Part D. Wizard the Device
 
-Our real prototype drives the light from incoming texts, so it does not need a wizard. For the wizarded version we just hardcoded a word and made it show up on the grid from the laptop. That was it.
+For the wizarded version we hardcoded a word and made it show up on the grid from the laptop. One of us sat at the keyboard and triggered it. That was the whole setup.
 
 See our wizarded attempt here: https://youtube.com/shorts/yYF0AHQYx-4
 
-The wizarded version was good for checking that the grid and the scrolling looked right. The real version is what makes it feel like the building is answering you.
+This was enough to check that the grid and the scrolling looked right before we hooked up real texts.
 
 ## Part E. Costume the Device
 
