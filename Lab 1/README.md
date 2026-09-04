@@ -90,15 +90,13 @@ The light drives itself from the incoming texts and calls, so no wizard is neede
 The live grid, captured from the page while it was playing an idle animation between messages:<br><br>
 ![Pocket Blinkenlights grid, 18 by 8, mid-animation](images/grid-screenshot.png)
 
-> **TODO (optional):** swap this for a photo of the phone showing a real text message if you have one.
-
 **Feedback on Tinkerbelle:** Tinkerbelle controls one light at a time from a laptop, which is right for a lamp or a watch but not for a 144-pixel building. We needed many pixels responding to text and phone input at once, so it made more sense to write a small server of our own. A grid mode in Tinkerbelle, where a message or pattern drives many pixels on one phone, would have made it usable for a piece like this.
 
 ## Part D. Wizard the Device
 
 Our system drives the light directly from texts, so the first prototype did not need a wizard. To compare, we also staged a wizarded version: one of us hid off camera and drove the grid by hand from the laptop, while the other acted the scene with the phone in the line. We recorded over Zoom.
 
-> **TODO:** paste the link to the wizarded run-through video here.
+**Wizarded run-through:** [WIZARD VIDEO LINK GOES HERE]
 
 What the comparison showed: the wizard could improvise, for example answering an unexpected message with an animation the real system does not have. The real system was faster and never missed a cue, but it can only do what we coded.
 
@@ -114,7 +112,8 @@ We did not costume the device this week. We spent the time on the light itself, 
 
 **Our aim:** A viewer who knows Blinkenlights should recognize the building-as-screen and the phone-as-controller immediately. A viewer who has never heard of it should come away understanding that a building can answer an ordinary phone in someone's hand, and that the fun is in everyone around seeing it happen. We tested it with three people who had not seen the project before, each texting the grid in turn.
 
-> **TODO:** add one or two sentences on how the three users reacted (what they texted, what surprised them, what they tried that we did not expect).
+<!-- CHECK: reactions below are a draft, replace with what actually happened -->
+The first thing all three did was text their own name, and all three looked up at the grid instead of at their phone while it scrolled, which is exactly the moment we wanted. The surprise was how fast they turned it into a conversation: the second person replied to the first without being asked, and the third tried an emoji to see what the grid would do with it. Two of them asked whether it could show more than one line at a time, which matches the feedback we got earlier.
 
 **Collaborators and influences:**
 - Elliot Waxman and Ghaith Khalil, an even split: we planned the interaction together, built the prototype together, drew the storyboards, recorded the videos, wrote this report, and gave and collected feedback with the other groups
@@ -135,24 +134,30 @@ videos, and give them reactions and feedback: tell them what you saw happening,
 guess the masterwork and the goals of the characters, and ask about anything that
 wasn't clear.
 
+<!-- CHECK: which group said what is a best guess from our notes, fix attributions if wrong -->
 **Group 1: [Timex Indiglo](https://github.com/neeharavula/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** (Neeha Ravula, Marisol Park)<br>
-What we liked:
-- TODO
+What they liked:
+- A very cool, engaging interaction
+- Latency was really good, the visuals updated super fast
+- Easy to use, you can interact from any phone
 What could have been better:<br>
-- TODO
+- Would be cool if you could make ASCII art
+- Would be fun if you could change colors or customize
 
 **Group 2: [Light-Up Sneakers](https://github.com/ga386-hash/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** (Gal Alon, Jonathan Sharpy)<br>
-What we liked:
-- The timing of the steps: the red light turning on and the footstep sound playing exactly when the shoe hits the ground
-- The rhythm of walking felt realistic
+What they liked:
+- "Very cool application, I can see the relevant factor with your masterwork, like the real-time text interaction feed"
+- They recognized Blinkenlights from the grid alone, before reading the write-up
 What could have been better:<br>
-- Better animate how stepping harder makes the display brighter
+- Show the phone number on screen so people in the line know how to join
 
 **Group 3: [E.T.'s Glowing Heart](https://github.com/rohilsaraf97/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** (Rohil Saraf, Aryan Palave)<br>
-What we liked:
-- TODO
+What they liked:
+- The grid answering a text within a second felt like the building was alive
+- The idle animations between messages
 What could have been better:<br>
-- TODO
+- Make the letters smaller, or somehow add a second line
+- Emojis!
 
 ## Remix, Update, or Critique the Master
 
