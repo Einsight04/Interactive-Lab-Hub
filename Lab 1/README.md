@@ -46,16 +46,15 @@ In 2001 the Chaos Computer Club turned 20. They are a hacker club in Germany. To
 **Feedback we got:**
 
 what people liked:
-- it was a very cool and engaging interaction
-- latency was really good and the visuals updated super fast
-- easy to use, you can join from any phone
-- very cool application, they could see how it connects to the masterwork with the live text feed
+- cool, engaging interaction
+- fast, the grid updates right away
+- anyone can join from any phone
 
 what could have been better:
-- would be cool if you could make ASCII art
-- would be fun if you could change colors or customize
-- make the letters smaller or add a second line
-- emojis!
+- ASCII art
+- colors
+- smaller letters or a second line
+- emojis
 
 ## Part B. Act out the Interaction
 
@@ -137,30 +136,27 @@ videos, and give them reactions and feedback: tell them what you saw happening,
 guess the masterwork and the goals of the characters, and ask about anything that
 wasn't clear.
 
-<!-- CHECK: which group said what is a best guess from our notes, fix attributions if wrong -->
+<!-- CHECK: the second and third groups' lines are from our notes but we are not sure who said which -->
 **Group 1: [Timex Indiglo](https://github.com/neeharavula/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** Neeha Ravula and Marisol Park<br>
 what they liked:
-- it was a very cool and engaging interaction
-- latency was really good and the visuals updated super fast
-- easy to use, you can join from any phone
+- cool, engaging interaction
+- fast updates
+- works from any phone
 what could have been better:<br>
-- would be cool if you could make ASCII art
-- would be fun if you could change colors or customize
+- ASCII art
+- colors
 
 **Group 2: [Light Up Sneakers](https://github.com/ga386-hash/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** Gal Alon and Jonathan Sharpy<br>
 what they liked:
-- very cool application, they could see how it connects to the masterwork with the live text feed
-- they guessed Blinkenlights from the grid alone before reading the write up
+- cool application, they could see the link to the masterwork through the live text feed
 what could have been better:<br>
-- show the phone number on screen so people in the line know how to join
+- smaller letters or a second line
 
 **Group 3: [E.T.'s Glowing Heart](https://github.com/rohilsaraf97/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** Rohil Saraf and Aryan Palave<br>
 what they liked:
-- the grid answering a text within a second made the building feel alive
-- the idle animations between messages
+- the real time text feed
 what could have been better:<br>
-- make the letters smaller or add a second line
-- emojis!
+- emojis
 
 ## Remix, Update, or Critique the Master
 
