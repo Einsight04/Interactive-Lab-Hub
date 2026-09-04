@@ -100,7 +100,7 @@ The live grid, caught mid animation between messages:<br><br>
 
 Our system drives the light on its own, so the first prototype did not need a wizard. To compare, we also did a wizarded version. One of us hid off camera and drove the grid by hand from the laptop. The other acted the scene with the phone in the line. We recorded over Zoom.
 
-See our wizarded attempt here: [WIZARD VIDEO LINK GOES HERE]
+See our wizarded attempt here: https://youtube.com/shorts/yYF0AHQYx-4
 
 What we noticed is that the wizard could improvise. If someone sent a weird text the wizard could answer with an animation the real system does not have. The real system was faster and never missed a cue, but it can only do what we coded.
 
