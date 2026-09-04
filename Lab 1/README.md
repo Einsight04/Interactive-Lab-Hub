@@ -116,12 +116,7 @@ We did not costume the device this week. We spent the time on the light itself, 
 
 **Our aim:** Someone who knows Blinkenlights should recognize the building as a screen and the phone as the controller right away. Someone who has never heard of it should get that a building can answer the phone in your hand, and that the fun is everyone around you seeing it happen.
 
-**Testing it:** We tried it with three people who had not seen the project before. Each one texted the grid in turn.
-<!-- CHECK: reactions below are a draft, replace with what actually happened -->
-- all three texted their own name first, and all three looked up at the grid instead of at their phone while it scrolled, which is exactly the moment we wanted
-- it turned into a conversation fast, the second person replied to the first without being asked
-- the third tried an emoji to see what the grid would do with it
-- two of them asked if it could show more than one line at a time, same as the feedback we got earlier
+**Testing it:** We tried it with three people who had not seen the project before. Each of them texted a word or two. The messages queued up, and they stood there watching each other's words scroll in and out while waiting for their own. Nobody tried anything fancy, no emojis, no conversation. Just simple words, and everyone looking at the grid together to see whose was next.
 
 **Collaborators and influences:**
 - Elliot Waxman and Ghaith Khalil, an even split. We planned it together, built it together, drew the storyboards, recorded the videos, wrote this up, and traded feedback with the other groups
