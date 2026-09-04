@@ -98,11 +98,11 @@ The live grid, caught mid animation between messages:<br><br>
 
 ## Part D. Wizard the Device
 
-Our system drives the light on its own, so the first prototype did not need a wizard. To compare, we also did a wizarded version, in person, together. One of us stayed out of frame and drove the grid by hand from the laptop. The other acted the scene with the phone in the line. We filmed it on a phone.
+Our system drives the light on its own from incoming texts, so the real prototype does not need a wizard. But we did a wizarded version too, to see the difference. Everything happened from the laptop. One of us sat at the keyboard and put a word on the grid by hand, on cue, with a key press, instead of waiting for a real text to come in. No phone, no line, just a person deciding when the building lights up.
 
 See our wizarded attempt here: https://youtube.com/shorts/yYF0AHQYx-4
 
-What we noticed is that the wizard could improvise. If someone sent a weird text the wizard could answer with an animation the real system does not have. The real system was faster and never missed a cue, but it can only do what we coded.
+What we noticed is that the wizard version is faster to demo and easy to control, because you pick the word and the moment. But it is also obviously a person at a laptop. The real version is slower, since a text has to go through the phone network and the queue, but the delay is part of what makes it feel like the building is answering you and not us.
 
 ## Part E. Costume the Device
 
