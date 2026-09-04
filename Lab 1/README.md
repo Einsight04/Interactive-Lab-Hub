@@ -98,7 +98,7 @@ The live grid, caught mid animation between messages:<br><br>
 
 ## Part D. Wizard the Device
 
-Our system drives the light on its own, so the first prototype did not need a wizard. To compare, we also did a wizarded version. One of us hid off camera and drove the grid by hand from the laptop. The other acted the scene with the phone in the line. We recorded over Zoom.
+Our system drives the light on its own, so the first prototype did not need a wizard. To compare, we also did a wizarded version, in person, together. One of us stayed out of frame and drove the grid by hand from the laptop. The other acted the scene with the phone in the line. We filmed it on a phone.
 
 See our wizarded attempt here: https://youtube.com/shorts/yYF0AHQYx-4
 
