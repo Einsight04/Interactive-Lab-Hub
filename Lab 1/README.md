@@ -59,7 +59,7 @@ What could have been better:
 
 ## Part B. Act out the Interaction
 
-Our first run-through, acting it out before the light was working: https://youtube.com/shorts/tsh5MOguhmc?feature=share
+We acted the scene out around a table before the grid could take input: one of us played the sender, the other the stranger in line, with a laptop screen standing in for the building.
 
 When we acted out the sequence, we discovered the following:
 - The moment that sells the piece is not the sender looking at their phone, it is the stranger next to them looking up at the building. We needed to keep the camera on the line, not on the phone.
@@ -80,6 +80,8 @@ Instead of the Tinkerbelle tool we built our own: **Pocket Blinkenlights**, a ph
 - **Submitted animations.** A pixel editor at `/submit` lets anyone draw frames for the building; approved animations join the rotation and play whenever nobody is texting or playing.
 
 The light drives itself from the incoming texts and calls, so no wizard is needed for the basic interaction. When there is no input, the scheduler plays the animation archive, so the building never goes dark.
+
+**Light working, first test:** https://youtube.com/shorts/tsh5MOguhmc?feature=share (the grid on a laptop, driven live from a phone)
 
 **Live page:** https://pocket-blinkenlights.fly.dev (open it on a phone for the full effect)
 
