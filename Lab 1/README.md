@@ -142,6 +142,7 @@ what they liked:
 - cool, engaging interaction
 - fast updates
 - works from any phone
+
 what could have been better:<br>
 - ASCII art
 - colors
@@ -149,12 +150,14 @@ what could have been better:<br>
 **Group 2: [Light Up Sneakers](https://github.com/ga386-hash/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** Gal Alon and Jonathan Sharpy<br>
 what they liked:
 - cool application, they could see the link to the masterwork through the live text feed
+
 what could have been better:<br>
 - smaller letters or a second line
 
 **Group 3: [E.T.'s Glowing Heart](https://github.com/rohilsaraf97/Interactive-Lab-Hub/blob/Fall2026/Lab%201/README.md)** Rohil Saraf and Aryan Palave<br>
 what they liked:
 - the real time text feed
+
 what could have been better:<br>
 - emojis
 
