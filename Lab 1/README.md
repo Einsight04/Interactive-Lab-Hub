@@ -122,7 +122,7 @@ We did not costume the device this week. We spent the time on the light itself, 
 - Elliot Waxman and Ghaith Khalil, an even split. We planned it together, built it together, drew the storyboards, recorded the videos, wrote this up, and traded feedback with the other groups
 - The Chaos Computer Club, for the original Blinkenlights and the archive at blinkenlights.net
 - The IRL-CT Tinkerbelle tool, which we studied before deciding to build our own grid
-- Neeha, Marisol and the other groups who gave us feedback
+- Neeha Ravula and Marisol Park, Rohil Saraf and Aryan Palave, and Gal Alon and Jonathan Sharpy, the three groups who gave us feedback
 
 ---
 
