@@ -85,7 +85,10 @@ The light drives itself from the incoming texts and calls, so no wizard is neede
 
 **Code:** https://github.com/Einsight04/pocket-blinkenlights (public copy of Elliot's repo, full commit history)
 
-> **TODO:** add a screenshot or photo of the grid showing a message, e.g. `images/grid-screenshot.png`.
+The live grid, captured from the page while it was playing an idle animation between messages:<br><br>
+![Pocket Blinkenlights grid, 18 by 8, mid-animation](images/grid-screenshot.png)
+
+> **TODO (optional):** swap this for a photo of the phone showing a real text message if you have one.
 
 **Feedback on Tinkerbelle:** Tinkerbelle controls one light at a time from a laptop, which is right for a lamp or a watch but not for a 144-pixel building. We needed many pixels responding to text and phone input at once, so it made more sense to write a small server of our own. A grid mode in Tinkerbelle, where a message or pattern drives many pixels on one phone, would have made it usable for a piece like this.
 
