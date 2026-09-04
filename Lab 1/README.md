@@ -102,9 +102,9 @@ What the comparison showed: the wizard could improvise, for example answering an
 
 ## Part E. Costume the Device
 
-> **TODO:** if you costumed the phone as a building (cardboard shell with cut-out windows, for example), add a photo here as `images/costume.png` and a sentence on why. If not, delete this section's TODO and write "We did not costume the device this week."
+We did not costume the device this week. We spent the time on the light itself, getting texts, Pong, and the idle animations all working on the grid before touching how it looks.
 
-**Concerns/opportunities in shaping the look:** The grid has to read as a building at a glance, so the cells should look like windows and the whole thing should stand upright, like a facade. It also has to be bright enough to be seen from the back of a line at night.
+**Concerns/opportunities in shaping the look:** The plan for a later week is a small building enclosure for the phone, with the screen showing through cut-out windows so the grid reads as a facade rather than a phone. It has to stand upright like a building, be bright enough to be seen from the back of a line at night, and hide the phone's edges. A 3D-printed shell is already listed as the next milestone in our code repo.
 
 ## Part F. Record
 
