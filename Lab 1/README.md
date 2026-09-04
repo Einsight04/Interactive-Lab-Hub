@@ -26,7 +26,7 @@ In 2001 the Chaos Computer Club, a German hacker club, turned 20 and decided to 
 
 ## Part A. Plan
 
-- **Setting:** A long, boring line at night outside a pop-up restaurant. There's a pixel-grid "building" everyone in the line can see.
+- **Setting:** A long, boring line at night outside a popup restaurant. There's a pixel grid "building" everyone in the line can see.
 - **Players:** A bored person in the line (the sender); the strangers around them (the audience, who can become senders too); the building's grid of lights (the light).
 - **Activity:** Someone texts a number and their message shows up on the grid for the whole line to see. People look up. Someone texts back. The line starts talking to itself through the building. Or two people play Pong on the grid with their phones and the winner gets to swap places in line.
 - **Goals:** The sender wants to be seen and kill time. The strangers want something to look at, then want to reply. The building just wants to keep everyone entertained while they wait.
@@ -49,7 +49,7 @@ what people liked:
 - it was a very cool, engaging interaction
 - latency was really good, the visuals updated super fast
 - easy to use, you can interact from any phone
-- "very cool application, I can see the relevant factor with your masterwork, like the real-time text interaction feed"
+- "very cool application, I can see the relevant factor with your masterwork, like the real time text interaction feed"
 
 what could have been better:
 - would be cool if you could make ASCII art
@@ -76,7 +76,7 @@ We used these findings to iterate on our storyboard, resulting in Iteration 3 ab
 We ended up building our own thing instead of using Tinkerbelle. It's called Pocket Blinkenlights: a web page that turns a phone (or any screen) into an 18 by 8 grid of windows, same size as the real building. Each cell is one window, on or off, like the original lamps. It takes input the same three ways the original did:
 
 - **texting:** anyone texts a real phone number and the message scrolls across the grid in a 5 by 7 pixel font
-- **phone-keypad Pong:** two callers each get a paddle and move it with the keys on their phone
+- **phone keypad Pong:** two callers each get a paddle and move it with the keys on their phone
 - **submitted animations:** there's a pixel editor at `/submit` where anyone can draw frames for the building; approved ones join the rotation and play whenever nobody is texting
 
 The light drives itself from the texts and calls, so there's no wizard in the loop for the basic interaction. When there's no input the scheduler plays the animation archive so the building never goes dark.
@@ -87,10 +87,10 @@ The light drives itself from the texts and calls, so there's no wizard in the lo
 
 **Code:** https://github.com/Einsight04/pocket-blinkenlights
 
-The live grid, caught mid-animation between messages:<br><br>
-![the grid, 18 by 8, mid-animation](images/grid-screenshot.png)
+The live grid, caught mid animation between messages:<br><br>
+![the grid, 18 by 8, mid animation](images/grid-screenshot.png)
 
-**Feedback on Tinkerbelle:** Tinkerbelle drives one light from a laptop, which is perfect for a lamp or a watch but not for a 144-pixel building. We needed lots of pixels reacting to texts and calls at once, so writing our own small server made more sense. A grid mode in Tinkerbelle, where a message or pattern drives a whole grid of pixels on one phone, would have made it work for a piece like this.
+**Feedback on Tinkerbelle:** Tinkerbelle drives one light from a laptop, which is perfect for a lamp or a watch but not for a 144 pixel building. We needed lots of pixels reacting to texts and calls at once, so writing our own small server made more sense. A grid mode in Tinkerbelle, where a message or pattern drives a whole grid of pixels on one phone, would have made it work for a piece like this.
 
 ## Part D. Wizard the Device
 
@@ -104,13 +104,13 @@ What we noticed: the wizard could improvise, like answering a weird text with an
 
 We didn't costume the device this week. We spent the time on the light itself, getting texts, Pong, and the idle animations all working before worrying about how it looks.
 
-**Concerns/opportunities in shaping the look:** The plan for later is a little building shell for the phone, with the screen showing through cut-out windows so it reads as a facade and not a phone. It has to stand upright like a building, be bright enough to see from the back of a line at night, and hide the phone's edges. A 3D-printed shell is already the next milestone in our code repo.
+**Concerns/opportunities in shaping the look:** The plan for later is a little building shell for the phone, with the screen showing through cut out windows so it reads as a facade and not a phone. It has to stand upright like a building, be bright enough to see from the back of a line at night, and hide the phone's edges. A 3D printed shell is already the next milestone in our code repo.
 
 ## Part F. Record
 
 **Video Sketch:** https://youtube.com/shorts/RPhKJcqeU8U?feature=share
 
-**Our aim:** Someone who knows Blinkenlights should recognize the building-as-screen and phone-as-controller right away. Someone who's never heard of it should get that a building can answer the phone in your hand, and that the fun is everyone around you seeing it happen.
+**Our aim:** Someone who knows Blinkenlights should recognize the building as screen and phone as controller right away. Someone who's never heard of it should get that a building can answer the phone in your hand, and that the fun is everyone around you seeing it happen.
 
 **Testing it:** We tried it with three people who hadn't seen the project before, each texting the grid in turn.
 <!-- CHECK: reactions below are a draft, replace with what actually happened -->
