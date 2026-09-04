@@ -85,7 +85,7 @@ The light drives itself from the incoming texts and calls, so no wizard is neede
 
 **Live page:** https://pocket-blinkenlights.fly.dev (open it on a phone for the full effect)
 
-**Code:** https://github.com/Einsight04/pocket-blinkenlights (public copy of Elliot's repo, full commit history)
+**Code:** https://github.com/Einsight04/pocket-blinkenlights (public copy of our team repo, full commit history)
 
 The live grid, captured from the page while it was playing an idle animation between messages:<br><br>
 ![Pocket Blinkenlights grid, 18 by 8, mid-animation](images/grid-screenshot.png)
