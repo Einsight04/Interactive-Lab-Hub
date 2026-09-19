@@ -6,7 +6,7 @@ A little building that tells you when to stop working.
 
 Lab 1 turned a building into a screen. This time the building sits on a desk. Its windows go dark one at a time during a work session. When the last light goes out, it is time to step away. No ticking numbers and no alarm.
 
-**Status:** The implementation, concept sketches, software demo, and automated Pi checks are complete. Ghaith has confirmed the hardware checks are complete. Actual hardware photos/videos and three peer feedback exchanges remain outstanding. See the [evidence checklist](evidence/README.md). The animation below is a software preview, not a recording of the device.
+**Status:** The implementation, concept sketches, software demo, and automated Pi checks are complete. Ghaith has confirmed the hardware checks are complete. The startup-screen photo is included below. The color-test photo, two hardware videos, and three peer feedback exchanges remain outstanding. See the [evidence checklist](evidence/README.md). The animation below is a software preview, not a recording of the device.
 
 ![Accelerated software preview of One More Window](images/software-demo.gif)
 
@@ -32,7 +32,11 @@ The Pi has SPI devices available, and `piscreen.service` was running when connec
 
 The supplied [screen_test.py](screen_test.py) was run with blue selected. Its controls are A for white, B for blue, and both for backlight off. A bounded automated run checks driver execution; it does not verify those physical presses or the visible colors. [Run results](evidence/display-checks.txt).
 
-**Required photos:** still need a camera photo of the boot screen with this MAC, and a camera photo of the color test. [Capture instructions](evidence/README.md).
+The actual Pi running `piscreen.service`, photographed by Ghaith. The displayed MAC matches the device checked over SSH.
+
+![Raspberry Pi startup screen showing MAC 88:a2:9e:c8:53:9d](evidence/pi-startup.jpg)
+
+**Remaining photo:** the color screen test. [Capture instructions](evidence/README.md).
 
 ## Part D. Set up the Display Clock Demo
 

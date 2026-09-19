@@ -14,13 +14,16 @@
 
 Ghaith confirmed the hardware checks are complete, following the request to check the buttons and kit contents. This is user-reported confirmation; the automated logs above do not document physical button presses.
 
+## Camera evidence
+
+[Startup-screen photo](pi-startup.jpg), supplied by Ghaith as IMG_0854.jpg. Shows the actual Pi and Mini PiTFT running the startup information screen, with MAC `88:a2:9e:c8:53:9d` readable. Original image copied without editing.
+
 ## Still needed for the assignment
 
-1. A photo of this Pi displaying `piscreen.service`, with its MAC visible.
-2. A photo of the actual color screen test. Check A (white), B (chosen color), and both (backlight off).
-3. A short camera video of `window_sweep.py --demo`, the first iteration.
-4. A short camera video of `window_clock.py --demo`. Press A to start, A to pause, A to resume, B to enter a break, then hold A+B for one second to reset. A 25-second work session and 5-second break make transitions visible.
-5. Real comments from three peers and confirmation that outgoing feedback was delivered.
+1. A photo of the actual color screen test. Check A (white), B (chosen color), and both (backlight off).
+2. A short camera video of `window_sweep.py --demo`, the first iteration.
+3. A short camera video of `window_clock.py --demo`. Press A to start, A to pause, A to resume, B to enter a break, then hold A+B for one second to reset. A 25-second work session and 5-second break make transitions visible.
+4. Real comments from three peers and confirmation that outgoing feedback was delivered.
 
 ## Recording commands (on the Pi)
 
