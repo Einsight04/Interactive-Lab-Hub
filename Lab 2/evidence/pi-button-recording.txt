@@ -1,0 +1,6 @@
+Sep 19 19:46:48 ghaith-pi systemd[1]: Started lab2-final-recording.service - /home/pi/venv/bin/python -u /home/pi/lab-hub/Lab 2/window_clock.py --demo.
+Sep 19 19:46:48 ghaith-pi python[25714]: Clock running; A: start/pause, B: next, hold A+B: reset
+Sep 19 19:47:34 ghaith-pi python[25714]: button=a phase=work elapsed=0.00 running=True
+Sep 19 19:47:40 ghaith-pi python[25714]: button=a phase=work elapsed=6.17 running=False
+Sep 19 19:47:43 ghaith-pi python[25714]: button=a phase=work elapsed=6.17 running=True
+Sep 19 19:48:04 ghaith-pi python[25714]: button=b phase=break elapsed=0.00 running=True

@@ -6,7 +6,7 @@ A little building that tells you when to stop working.
 
 Lab 1 turned a building into a screen. This time the building sits on a desk. Its windows go dark one at a time during a work session. When the last light goes out, it is time to step away. No ticking numbers and no alarm.
 
-**Status:** The implementation, concept sketches, software demo, and automated Pi checks are complete. Ghaith has confirmed the hardware checks are complete. Both hardware photos are included below. The basic-prototype hardware video is included. The final interaction video and three peer feedback exchanges remain outstanding. See the [evidence checklist](evidence/README.md). The animation below is a software preview, not a recording of the device.
+**Status:** The implementation, concept sketches, software demo, and automated Pi checks are complete. Ghaith has confirmed the hardware checks are complete. Both hardware photos and both camera videos are included below. Three peer feedback exchanges remain outstanding. See the [evidence checklist](evidence/README.md). The animation below is a software preview, not a recording of the device.
 
 ![Accelerated software preview of One More Window](images/software-demo.gif)
 
@@ -131,9 +131,11 @@ The installed [service](window-clock.service) starts the normal clock on boot. I
 
 ### Checks and video
 
+[Watch the final timer on the actual Pi](evidence/pi-final-demo.mp4). Ghaith recorded this 38-second demonstration in accelerated mode. It shows the work session and the switch to a five-second break, ending on “READY?” The [physical button log](evidence/pi-button-recording.txt) records start, pause, resume, and the break press; elapsed work time stays at 6.17 seconds across the pause.
+
 Eight [automated tests](test_window_clock.py) cover pause accounting, completion, phase changes, reset, invalid durations, frame generation, button bounce, and two-button gestures. They pass on the laptop and Pi. A 28-second accelerated hardware run exercises the display driver through the work-session completion. [Pi log](evidence/pi-smoke-test.txt).
 
-[Watch the accelerated software demo](evidence/software-demo.mp4). The same renderer produces the on-device frames. This file demonstrates the state sequence, including pause and break, but does not replace the required camera video of the Pi. Ghaith subsequently confirmed that the hardware checks are complete; this confirmation is separate from the automated test evidence.
+[Watch the accelerated software demo](evidence/software-demo.mp4). The same renderer produces the on-device frames. This file demonstrates the state sequence, including pause and break, and is supplementary to the actual Pi recording above. Ghaith subsequently confirmed that the hardware checks are complete; this confirmation is separate from the automated test evidence.
 
 ## Contributions and influences
 

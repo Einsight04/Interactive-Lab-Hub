@@ -22,10 +22,11 @@ Ghaith confirmed the hardware checks are complete, following the request to chec
 
 [Basic prototype camera video](pi-basic-demo.mp4), supplied by Ghaith as IMG_0866.mov. The 26.17-second recording shows the actual display losing windows and reaching “STEP AWAY” at the end. MOV remuxed to MP4 without re-encoding; video and audio preserved.
 
+[Final timer camera video](pi-final-demo.mp4), supplied by Ghaith as IMG_0867.mov. Duration 38.31 seconds; shows the work-to-break sequence and ends on “READY?” MOV remuxed to MP4 without re-encoding, preserving video and audio. [Device log during recording](pi-button-recording.txt) confirms physical A start/pause/resume and B break events.
+
 ## Still needed for the assignment
 
-1. A short camera video of `window_clock.py --demo`. Press A to start, A to pause, A to resume, B to enter a break, then hold A+B for one second to reset. A 25-second work session and 5-second break make transitions visible.
-2. Real comments from three peers and confirmation that outgoing feedback was delivered.
+1. Real comments from three peers and confirmation that outgoing feedback was delivered.
 
 ## Recording commands (on the Pi)
 
