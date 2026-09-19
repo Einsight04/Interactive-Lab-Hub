@@ -1,0 +1,3 @@
+Type the name of a color and hit enter: screen_test exit=124 (124 means expected timeout)
+screen_clock exit=124 (124 means expected timeout)
+window_sweep exit=0

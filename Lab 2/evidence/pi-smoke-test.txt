@@ -1,0 +1,14 @@
+test_bounce_produces_one_release (test_window_clock.ButtonTests.test_bounce_produces_one_release) ... ok
+test_chord_resets_once_and_suppresses_release (test_window_clock.ButtonTests.test_chord_resets_once_and_suppresses_release) ... ok
+test_short_chord_does_nothing (test_window_clock.ButtonTests.test_short_chord_does_nothing) ... ok
+test_completion_waits_for_deliberate_break (test_window_clock.ClockTests.test_completion_waits_for_deliberate_break) ... ok
+test_invalid_duration (test_window_clock.ClockTests.test_invalid_duration) ... ok
+test_pause_does_not_consume_time (test_window_clock.ClockTests.test_pause_does_not_consume_time) ... ok
+test_render_each_state (test_window_clock.ClockTests.test_render_each_state) ... ok
+test_reset_and_clock_adjustment (test_window_clock.ClockTests.test_reset_and_clock_adjustment) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.024s
+
+OK
+Clock running; A: start/pause, B: next, hold A+B: reset

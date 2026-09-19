@@ -1,0 +1,16 @@
+[Unit]
+Description=One More Window lab clock
+After=local-fs.target
+Conflicts=piscreen.service
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/lab-hub/Lab 2
+ExecStart=/home/pi/venv/bin/python "/home/pi/lab-hub/Lab 2/window_clock.py"
+Restart=on-failure
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

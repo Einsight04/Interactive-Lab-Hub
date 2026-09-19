@@ -64,7 +64,8 @@ while True:
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=400)
 
-    #TODO: Lab 2 part D work should be filled in here. You should be able to look in cli_clock.py and stats.py 
+    draw.text((10, 32), time.strftime("%H:%M:%S"), font=font, fill="white")
+    draw.text((10, 66), time.strftime("%a %d %b %Y"), font=font, fill="white")
 
     # Display image.
     disp.image(image, rotation)
