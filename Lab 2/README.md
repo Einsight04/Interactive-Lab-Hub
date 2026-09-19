@@ -6,7 +6,7 @@ A little building that tells you when to stop working.
 
 Lab 1 turned a building into a screen. This time the building sits on a desk. Its windows go dark one at a time during a work session. When the last light goes out, it is time to step away. No ticking numbers and no alarm.
 
-**Status:** The implementation, concept sketches, software demo, and automated Pi checks are complete. Ghaith has confirmed the hardware checks are complete. Both hardware photos are included below. Two hardware videos and three peer feedback exchanges remain outstanding. See the [evidence checklist](evidence/README.md). The animation below is a software preview, not a recording of the device.
+**Status:** The implementation, concept sketches, software demo, and automated Pi checks are complete. Ghaith has confirmed the hardware checks are complete. Both hardware photos are included below. The basic-prototype hardware video is included. The final interaction video and three peer feedback exchanges remain outstanding. See the [evidence checklist](evidence/README.md). The animation below is a software preview, not a recording of the device.
 
 ![Accelerated software preview of One More Window](images/software-demo.gif)
 
@@ -93,7 +93,7 @@ The accelerated mode turns off one window per second. Without `--demo`, the sess
 
 ## Make a short video of your modified barebones PiClock
 
-The first-iteration camera video remains to be recorded. The [capture checklist](evidence/README.md) includes the exact command and shot sequence.
+[Watch the basic prototype on the actual Pi](evidence/pi-basic-demo.mp4). Recorded by Ghaith, this 26-second clip shows the windows going dark and ends on “STEP AWAY.” The prototype runs in accelerated demo mode: one window per second instead of one per minute.
 
 ## Now, make your own PiClock
 

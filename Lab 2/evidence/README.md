@@ -20,11 +20,12 @@ Ghaith confirmed the hardware checks are complete, following the request to chec
 
 [Color-test photo](pi-color-test.jpg), supplied by Ghaith as image.jpg while the blue test was running. Shows the lower button being held and blue light around the display; the center is overexposed. Original image copied without editing.
 
+[Basic prototype camera video](pi-basic-demo.mp4), supplied by Ghaith as IMG_0866.mov. The 26.17-second recording shows the actual display losing windows and reaching “STEP AWAY” at the end. MOV remuxed to MP4 without re-encoding; video and audio preserved.
+
 ## Still needed for the assignment
 
-1. A short camera video of `window_sweep.py --demo`, the first iteration.
-2. A short camera video of `window_clock.py --demo`. Press A to start, A to pause, A to resume, B to enter a break, then hold A+B for one second to reset. A 25-second work session and 5-second break make transitions visible.
-3. Real comments from three peers and confirmation that outgoing feedback was delivered.
+1. A short camera video of `window_clock.py --demo`. Press A to start, A to pause, A to resume, B to enter a break, then hold A+B for one second to reset. A 25-second work session and 5-second break make transitions visible.
+2. Real comments from three peers and confirmation that outgoing feedback was delivered.
 
 ## Recording commands (on the Pi)
 
