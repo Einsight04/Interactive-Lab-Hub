@@ -1,6 +1,6 @@
 # Parts list inventory
 
-**Verification, September 19, 2026:** Raspberry Pi 5 Model B Rev 1.1 detected over SSH. Boot storage and USB networking are working. The Mini PiTFT SPI driver runs successfully; physical screen appearance and buttons still need a visual/manual check. The user reports the Pi is plugged in. RAM capacity, SD capacity, power-supply model, and all loose kit items below have not been physically inventoried. The list below is the expected kit, not a claim that every item is present.
+**Verification:** Raspberry Pi 5 Model B Rev 1.1 detected over SSH on September 19, 2026. Boot storage, USB networking, and the Mini PiTFT SPI driver were checked automatically. Ghaith subsequently confirmed that the hardware checks, including the button and kit checks requested in the report checklist, are complete. No missing parts were reported. The list below is the course kit specification; individual model numbers and capacities were not independently measured by Codex.
 
 
 ## Parts in the kit by Wednesday class Sep. 9th

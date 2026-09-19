@@ -10,6 +10,10 @@
 
 - [Startup service](service-status.txt): enabled, active, and running with zero restarts at verification.
 
+## User-confirmed checks
+
+Ghaith confirmed the hardware checks are complete, following the request to check the buttons and kit contents. This is user-reported confirmation; the automated logs above do not document physical button presses.
+
 ## Still needed for the assignment
 
 1. A photo of this Pi displaying `piscreen.service`, with its MAC visible.
@@ -17,7 +21,6 @@
 3. A short camera video of `window_sweep.py --demo`, the first iteration.
 4. A short camera video of `window_clock.py --demo`. Press A to start, A to pause, A to resume, B to enter a break, then hold A+B for one second to reset. A 25-second work session and 5-second break make transitions visible.
 5. Real comments from three peers and confirmation that outgoing feedback was delivered.
-6. A physical check of kit contents; the parts list distinguishes detected hardware from unverified items.
 
 ## Recording commands (on the Pi)
 

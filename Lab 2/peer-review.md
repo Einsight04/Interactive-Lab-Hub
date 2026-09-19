@@ -30,3 +30,11 @@ No received feedback has been verified. Ask each peer to try the sketch or proto
 - Interruptions need pause/resume rather than throwing away the session.
 - A break should wait for a deliberate press, since someone may not see the finish immediately.
 - Work and break should differ through words and fill direction as well as color.
+
+## Request to include with each outgoing review
+
+My Lab 2 is a Pomodoro timer shown as a building: windows go dark during 25 minutes of work and fill back up during a five-minute break. A pauses/resumes and B switches modes. Could you take a look and give me a quick reaction? Is the window metaphor clear, and would you expect the break to start automatically or wait for a button press?
+
+[One More Window report and demo](https://github.com/Einsight04/Interactive-Lab-Hub/tree/Fall2026/Lab%202)
+
+Incoming responses remain pending. The AI design critique above is not a substitute for three classmates’ responses.
