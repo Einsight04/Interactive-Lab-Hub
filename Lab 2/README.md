@@ -92,10 +92,8 @@ B can also end a session early. Text labels and opposite fill directions disting
 
 The timer uses a monotonic clock so changes to the system time do not affect the session. Button inputs are debounced, and holding both buttons suppresses accidental single-button actions. The [startup service](window-clock.service) runs the clock on boot.
 
-### Final video and testing
+### Final video
 
 [Watch the final timer](evidence/pi-final-demo.mp4).
 
-This 38-second recording uses a 25-second work session and a five-second break. It demonstrates the interaction and ends on “READY?” The [button log](evidence/pi-button-recording.txt) confirms start, pause, resume, and the break press. Elapsed work time stays at 6.17 seconds across the pause.
-
-Eight [automated tests](test_window_clock.py) pass on the laptop and Pi, covering timing, phase changes, reset, rendering, and button handling. [Pi test results](evidence/pi-smoke-test.txt).
+This 38-second recording uses a 25-second work session and a five-second break. It demonstrates the interaction and ends on “READY?”

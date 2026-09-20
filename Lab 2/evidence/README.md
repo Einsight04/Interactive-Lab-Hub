@@ -12,13 +12,6 @@
 
 Photos and videos recorded by Ghaith. Photos are unedited. Videos were remuxed from MOV to MP4 without re-encoding, preserving picture and audio.
 
-## Test results
+## Command-line clock
 
-- [Device information](pi-environment.txt)
-- [Command-line clock output](cli-clock.txt)
-- [Display script checks](display-checks.txt)
-- [Pi automated tests and display run](pi-smoke-test.txt)
-- [Physical button events during recording](pi-button-recording.txt)
-- [Startup service status](service-status.txt)
-
-[Software animation](software-demo.mp4) is a supplementary rendered preview, not camera footage.
+[Terminal output](cli-clock.txt).

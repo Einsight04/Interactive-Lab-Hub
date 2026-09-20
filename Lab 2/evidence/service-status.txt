@@ -1,7 +1,0 @@
-active
-enabled
-NRestarts=0
-ActiveState=active
-SubState=running
-Sep 19 19:14:24 ghaith-pi systemd[1]: Started window-clock.service - One More Window lab clock.
-Sep 19 19:14:25 ghaith-pi python[14960]: Clock running; A: start/pause, B: next, hold A+B: reset

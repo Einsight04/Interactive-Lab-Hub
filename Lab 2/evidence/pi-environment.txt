@@ -1,8 +1,0 @@
-2026-09-19T19:11:11-04:00
-ghaith-pi
-Raspberry Pi 5 Model B Rev 1.1
-88:a2:9e:c8:53:9d
-/dev/spidev0.0
-/dev/spidev0.1
-/dev/spidev10.0
-inactive
