@@ -99,7 +99,3 @@ The timer uses a monotonic clock so changes to the system time do not affect the
 This 38-second recording uses a 25-second work session and a five-second break. It demonstrates the interaction and ends on “READY?” The [button log](evidence/pi-button-recording.txt) confirms start, pause, resume, and the break press. Elapsed work time stays at 6.17 seconds across the pause.
 
 Eight [automated tests](test_window_clock.py) pass on the laptop and Pi, covering timing, phase changes, reset, rendering, and button handling. [Pi test results](evidence/pi-smoke-test.txt).
-
-## Contributions and influences
-
-Ghaith Khalil provided project direction, checked the hardware, operated the prototype, and recorded the photos and videos. AI assistance supported the concept, code, testing, writeup, and generated storyboards. The IRL-CT starter and Adafruit examples provided the display setup. Pocket Blinkenlights from Lab 1 inspired the building metaphor and sketch style.
