@@ -1,6 +1,6 @@
-# Peer review drafts
+# Peer feedback
 
-Review drafts based on classmates' Lab 2 pages, read September 19, 2026. Not yet sent.
+Feedback sent to Neeha Ravula, Gal Alon, and Rohil Saraf on their Lab 2 concepts.
 
 ## Neeha Ravula — Spider-Verse Clock
 

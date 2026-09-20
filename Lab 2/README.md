@@ -60,7 +60,7 @@ The top row shows the initial interaction: start, work, step away. The bottom ro
 
 ### Peer feedback
 
-[Reviews of Neeha Ravula's, Gal Alon's, and Rohil Saraf's concepts](peer-review.md). These are drafts; the feedback exchanges are pending.
+[Feedback sent to Neeha Ravula, Gal Alon, and Rohil Saraf](peer-review.md). Incoming feedback is pending.
 
 # Lab 2 Part 2
 
