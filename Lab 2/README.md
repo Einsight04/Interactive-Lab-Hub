@@ -60,7 +60,7 @@ The top row shows the initial interaction: start, work, step away. The bottom ro
 
 ### Peer feedback
 
-[Feedback sent to Neeha Ravula, Gal Alon, and Rohil Saraf](peer-review.md). I also shared suggested feedback with Tony, Steven, and Ved, three friends outside the class, who agreed with the points recorded in the [feedback section](peer-review.md#feedback-from-friends). Incoming feedback from classmates is pending.
+[Feedback sent to Neeha Ravula, Gal Alon, and Rohil Saraf](peer-review.md). [Feedback from Tony, Steven, and Ved](peer-review.md#feedback-from-friends), three friends outside the class, is summarized separately. Incoming feedback from classmates is pending.
 
 # Lab 2 Part 2
 
