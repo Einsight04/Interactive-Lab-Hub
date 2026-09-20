@@ -23,3 +23,19 @@ The little character gives the wait a personality. The most useful part is that 
 ## Feedback received
 
 Pending.
+
+## Example responses for peer review
+
+These are fictional examples prepared for classmates to review, not comments received from them. Actual incoming feedback remains pending.
+
+### Example for Neeha
+
+“I like that it’s basically a pomodoro but you don’t have the numbers counting down in your face. The windows going out makes it feel calmer. At first I wasn’t sure if the lit windows meant time left or time already spent, but watching it for a few seconds cleared that up. Maybe show that in the starting screen somehow? I also like that you can pause it without restarting the whole thing.”
+
+### Example for Gal
+
+“The building makes sense once you see a couple windows turn off. I think the break filling it back up is a nice detail because it feels like the opposite of working. My main question was what happens if I press the bottom button by accident. Does it lose the work session? Maybe switching early could need a longer press. Otherwise the two buttons are pretty straightforward.”
+
+### Example for Rohil
+
+“The last window turning off is satisfying lol. I like that it actually stops and waits for you instead of immediately starting the break, because I’d probably still be finishing a sentence when it ends. I do think I could miss the finish if I wasn’t looking at it though. Maybe a small animation when it says step away? Nothing flashing constantly, just something to catch your eye.”
