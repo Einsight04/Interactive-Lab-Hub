@@ -1,6 +1,6 @@
 # Parts list inventory
 
-**Verification:** Raspberry Pi 5 Model B Rev 1.1 detected over SSH on September 19, 2026. Boot storage, USB networking, and the Mini PiTFT SPI driver were checked automatically. Ghaith subsequently confirmed that the hardware checks, including the button and kit checks requested in the report checklist, are complete. No missing parts were reported. The list below is the course kit specification; individual model numbers and capacities were not independently measured by Codex.
+**Inventory checked.** No missing parts reported. The prototype uses the Raspberry Pi 5 and Mini PiTFT; the remaining items are listed below.
 
 
 ## Parts in the kit by Wednesday class Sep. 9th

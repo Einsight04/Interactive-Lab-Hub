@@ -2,63 +2,51 @@
 
 **Ghaith Khalil — One More Window**
 
-A little building that tells you when to stop working.
-
-Lab 1 turned a building into a screen. This time the building sits on a desk. Its windows go dark one at a time during a work session. When the last light goes out, it is time to step away. No ticking numbers and no alarm.
-
-**Status:** The implementation, concept sketches, software demo, and automated Pi checks are complete. Ghaith has confirmed the hardware checks are complete. Both hardware photos and both camera videos are included below. Three peer feedback exchanges remain outstanding. See the [evidence checklist](evidence/README.md). The animation below is a software preview, not a recording of the device.
-
-![Accelerated software preview of One More Window](images/software-demo.gif)
+One More Window is a Pomodoro timer shown as a little building. Its 25 windows go dark one at a time during a work session. When the last light goes out, it is time to step away. During the five-minute break, the windows fill back up.
 
 ## Prep
 
-The original brief is preserved in [assignment.md](assignment.md). The [main lab hub](../README.md) links here. [Parts inventory](partslist.md) records the automated checks and Ghaith’s confirmation that the hardware checks are complete.
+Checked the hardware and [kit inventory](partslist.md). The project uses a Raspberry Pi 5 and an Adafruit Mini PiTFT display with two buttons.
 
 ## Part A. Connect to your Pi
 
-Connected over USB networking using the existing SSH alias `pi`, which resolves to `ghaith-pi.local`. The device reports Raspberry Pi 5 Model B Rev 1.1. The existing Python environment is `/home/pi/venv`. The repository is cloned to `/home/pi/lab-hub`.
-
-GitHub operations use the existing authenticated account on the laptop. No account password or access token is stored in this repository.
-
-[Device evidence](evidence/pi-environment.txt).
+Connected to `ghaith-pi.local` over SSH using USB networking. The Python environment is `/home/pi/venv`, and the repository is cloned to `/home/pi/lab-hub`.
 
 ## Part B. Try out the Command Line Clock
 
-Ran the supplied [cli_clock.py](cli_clock.py) on the Pi. It prints the date and time once per second on the same terminal line. [Captured output](evidence/cli-clock.txt).
+Ran [cli_clock.py](cli_clock.py) on the Pi. It prints the date and time once per second on the same terminal line. [Terminal output](evidence/cli-clock.txt).
 
 ## Part C. Set up your RGB Display
 
-The Pi has SPI devices available, and `piscreen.service` was running when connected. Its Wi-Fi MAC is **88:a2:9e:c8:53:9d**. The service was stopped before testing the other display scripts so two programs would not write to the screen at once.
+The startup screen shows the Pi's network information and MAC address, **88:a2:9e:c8:53:9d**.
 
-The supplied [screen_test.py](screen_test.py) was run with blue selected. Its controls are A for white, B for blue, and both for backlight off. A bounded automated run checks driver execution; it does not verify those physical presses or the visible colors. [Run results](evidence/display-checks.txt).
+![Pi startup screen with its MAC address](evidence/pi-startup.jpg)
 
-The actual Pi running `piscreen.service`, photographed by Ghaith. The displayed MAC matches the device checked over SSH.
+Stopped `piscreen.service` before running [screen_test.py](screen_test.py), so only one program controlled the display. Selected blue: the top button shows white, the bottom button shows blue, and holding both turns off the backlight.
 
-![Raspberry Pi startup screen showing MAC 88:a2:9e:c8:53:9d](evidence/pi-startup.jpg)
+The photo shows the bottom button held during the blue test. The camera washes out the center, but the blue light is visible around the screen.
 
-The color test with blue selected and the lower button held, photographed by Ghaith. The camera overexposes the center of the display; blue light is visible around its edges.
-
-![Actual Pi during the blue color test with the lower button held](evidence/pi-color-test.jpg)
+![Blue screen test](evidence/pi-color-test.jpg)
 
 ## Part D. Set up the Display Clock Demo
 
-Completed the missing drawing code in [screen_clock.py](screen_clock.py). Each second it clears the frame, draws the current time and date, and sends the image to the display. This is the literal clock exercise before moving to the building concept.
+Completed [screen_clock.py](screen_clock.py). Each second it clears the frame, draws the current time and date, and sends the image to the display.
 
 ## Part E. Sketch and brainstorm further interactions and features
 
-Three directions:
+Three ideas:
 
-- **One More Window:** a building empties as a work session passes. The last window going dark means the work is done for now.
-- **Cold Coffee:** a cup loses its steam over a session. Simple, but steam is hard to make readable on a tiny display.
+- **One More Window:** a building empties as a work session passes. The last window going dark means it is time to stop.
+- **Cold Coffee:** a cup loses its steam over a session. Simple, but steam could be hard to read on a tiny display.
 - **Last Train:** a train approaches a platform as a deadline gets closer. Clear urgency, but it might make a desk feel more stressful.
 
-The building keeps the connection to Lab 1 and gives time a physical quantity: occupied rooms. There are 25 windows. During a normal 25-minute work session, one goes dark each minute. You can glance at the amount of light instead of reading an exact remaining time.
+The building gives time a visible quantity: occupied rooms. One window goes dark each minute. The amount of light gives a sense of how much work time remains without a numerical countdown.
 
 ### Storyboards
 
-The top row shows the first idea: start, work, step away. The bottom row adds the interruption case: pause, return, deliberately begin a break. These are proposed interactions, not observations from a user test. The drawings are AI-generated in the rough visual style of the Lab 1 reference.
+The top row shows the initial interaction: start, work, step away. The bottom row adds interruptions: pause, return, and deliberately begin a break.
 
-![Initial and refined One More Window storyboards](images/storyboards.png)
+![Initial and refined interaction storyboards](images/storyboards.png)
 
 ### Interaction sketch: do, feel, know
 
@@ -68,79 +56,50 @@ The top row shows the first idea: start, work, step away. The bottom row adds th
 | **Feel** | The building gradually gets quieter | The remaining lights hold still | Teal windows fill back up |
 | **Know** | Fewer lights means closer to stopping | “PAUSED” means time is not being consumed | “READY?” means the break has finished |
 
-**Setting:** a desk during homework. **Person:** someone who keeps saying “one more thing.” **Goal:** make stopping feel like finishing something, rather than abandoning it.
+**Setting:** a desk during homework. **Person:** someone who keeps saying “one more thing.” **Goal:** make stopping feel like finishing something rather than abandoning it.
 
-### Peer review
+### Peer feedback
 
-The same contacts from Lab 1 were located through the class forks: Neeha Ravula, Gal Alon, and Rohil Saraf. Their Lab 2 pages describe a Spider-Verse clock, deadline/water clocks, and a Snack Clock. [Specific feedback drafts and source links](peer-review.md) are ready. These have not been sent, and there is no verified feedback from them on this project yet. Lab 1 collaborators are not automatically credited as Lab 2 collaborators.
+[Reviews of Neeha Ravula's, Gal Alon's, and Rohil Saraf's concepts](peer-review.md). These are drafts; the feedback exchanges are pending.
 
 # Lab 2 Part 2
 
-## Prep
-
-The remaining feedback requirement is three real exchanges. The questions to test are simple: What do the windows mean? Can you tell paused from finished? Would you expect the break to start automatically? Record the replies in [peer-review.md](peer-review.md).
-
 ## Modify the barebones clock to make it your own
 
-The first implementation is [window_sweep.py](window_sweep.py). It starts a work session immediately and turns off one window per minute. It uses the shared display renderer but hides the final version's button hints. This pass isolates the visual idea before adding interaction.
-
-```sh
-cd /home/pi/lab-hub/'Lab 2'
-/home/pi/venv/bin/python window_sweep.py --demo
-```
-
-The accelerated mode turns off one window per second. Without `--demo`, the session lasts 25 minutes.
+The first implementation, [window_sweep.py](window_sweep.py), starts immediately and turns off one window per minute. It tests the visual idea before adding button controls.
 
 ## Make a short video of your modified barebones PiClock
 
-[Watch the basic prototype on the actual Pi](evidence/pi-basic-demo.mp4). Recorded by Ghaith, this 26-second clip shows the windows going dark and ends on “STEP AWAY.” The prototype runs in accelerated demo mode: one window per second instead of one per minute.
+[Watch the basic prototype](evidence/pi-basic-demo.mp4).
+
+This 26-second recording shows the actual Pi's windows going dark and ends on “STEP AWAY.” Demo mode turns off one window per second instead of one per minute.
 
 ## Now, make your own PiClock
 
-The final implementation is [window_clock.py](window_clock.py).
-
-The first version only emptied the building. The refined version handles leaving in the middle, coming back, and deciding when a break actually begins. The storyboard's bottom row shows those changes. These refinements came from design reasoning with AI, not claimed peer testing.
+The final implementation is [window_clock.py](window_clock.py). It adds pause/resume and a separate break phase. Interruptions no longer mean losing the session, and the break waits until the user is ready to begin it.
 
 | Input or event | Result |
 |---|---|
 | A, before starting | Start a 25-minute work session |
 | A, during work or break | Pause or resume |
 | Work finishes | Hold the empty building and show “STEP AWAY” |
-| B | Switch to a fresh break or work session and start it immediately |
+| B | Switch to a fresh break or work session and start it |
 | Break runs | Fill the windows over five minutes |
 | Break finishes | Hold the full building and show “READY?” |
 | Both buttons held for one second | Reset to the idle work screen |
 
-B can also end a session early. There is no sound, network dependency, or automatic pressure to start working again. Text labels and opposite fill directions distinguish work from break as well as color. Restarting the program resets the session; persistence is not implemented.
+B can also end a session early. Text labels and opposite fill directions distinguish work from break as well as color. There is no alarm or automatic restart. Restarting the program resets the session.
 
-The timer uses `time.monotonic()` so a wall-clock correction does not consume or add session time. Button edges are debounced, and a two-button reset suppresses accidental single-button actions. Images are sent only when the frame changes.
+The timer uses a monotonic clock so changes to the system time do not affect the session. Button inputs are debounced, and holding both buttons suppresses accidental single-button actions. The [startup service](window-clock.service) runs the clock on boot.
 
-### Run it
+### Final video and testing
 
-Stop the startup clock before running a script manually:
+[Watch the final timer](evidence/pi-final-demo.mp4).
 
-```sh
-sudo systemctl stop window-clock.service piscreen.service
-cd /home/pi/lab-hub/'Lab 2'
-/home/pi/venv/bin/python window_clock.py
-# Or use a 25-second work / 5-second break for recording:
-/home/pi/venv/bin/python window_clock.py --demo
-```
+This 38-second recording uses a 25-second work session and a five-second break. It demonstrates the interaction and ends on “READY?” The [button log](evidence/pi-button-recording.txt) confirms start, pause, resume, and the break press. Elapsed work time stays at 6.17 seconds across the pause.
 
-The installed [service](window-clock.service) starts the normal clock on boot. It is active with zero restarts at verification ([status](evidence/service-status.txt)). After a manual test, use `sudo systemctl start window-clock.service`. To restore the original network-information screen, stop `window-clock.service` and start `piscreen.service`.
-
-### Checks and video
-
-[Watch the final timer on the actual Pi](evidence/pi-final-demo.mp4). Ghaith recorded this 38-second demonstration in accelerated mode. It shows the work session and the switch to a five-second break, ending on “READY?” The [physical button log](evidence/pi-button-recording.txt) records start, pause, resume, and the break press; elapsed work time stays at 6.17 seconds across the pause.
-
-Eight [automated tests](test_window_clock.py) cover pause accounting, completion, phase changes, reset, invalid durations, frame generation, button bounce, and two-button gestures. They pass on the laptop and Pi. A 28-second accelerated hardware run exercises the display driver through the work-session completion. [Pi log](evidence/pi-smoke-test.txt).
-
-[Watch the accelerated software demo](evidence/software-demo.mp4). The same renderer produces the on-device frames. This file demonstrates the state sequence, including pause and break, and is supplementary to the actual Pi recording above. Ghaith subsequently confirmed that the hardware checks are complete; this confirmation is separate from the automated test evidence.
+Eight [automated tests](test_window_clock.py) pass on the laptop and Pi, covering timing, phase changes, reset, rendering, and button handling. [Pi test results](evidence/pi-smoke-test.txt).
 
 ## Contributions and influences
 
-- **Ghaith Khalil:** supplied the Lab 1 reference, project direction, repository, and connected Pi.
-- **OpenAI Codex:** proposed the clock concept; implemented and tested the software; accessed the Pi; prepared this report and unsent peer-review drafts. Built-in image generation produced the storyboard using the Lab 1 drawing as a style reference. [Generation prompt](images/storyboard-prompt.txt).
-- **Lab 1 / Pocket Blinkenlights:** the building-as-display idea and visual reference. Elliot Waxman is credited in Lab 1; no new Lab 2 contribution from him is claimed here.
-- **IRL-CT course starter and its Adafruit-based examples:** SPI configuration, display setup, CLI clock, and the starting Part D file. The shared hardware adapter retains their pin configuration.
-- **Classmates' linked repositories:** reviewed for peer-feedback drafts. Their concepts and comments are not presented as original work or as conversations that occurred.
+Ghaith Khalil provided project direction, checked the hardware, operated the prototype, and recorded the photos and videos. AI assistance supported the concept, code, testing, writeup, and generated storyboards. The IRL-CT starter and Adafruit examples provided the display setup. Pocket Blinkenlights from Lab 1 inspired the building metaphor and sketch style.
