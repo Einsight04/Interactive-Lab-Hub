@@ -24,9 +24,9 @@ The little character gives the wait a personality. The most useful part is that 
 
 I shared suggested feedback with three friends outside the class, and each agreed with the points below. These summarize the feedback they endorsed.
 
-### Rob
+### Tony
 
-Rob agreed that showing windows instead of countdown numbers makes the timer feel calmer. The main point to clarify is whether lit windows mean time remaining or time already spent. A short explanation on the starting screen could help. He also agreed that pausing without restarting the session is useful.
+Tony agreed that showing windows instead of countdown numbers makes the timer feel calmer. The main point to clarify is whether lit windows mean time remaining or time already spent. A short explanation on the starting screen could help. He also agreed that pausing without restarting the session is useful.
 
 ### Steven
 
