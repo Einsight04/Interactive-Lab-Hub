@@ -1,6 +1,6 @@
 # Interactive Prototyping: The Clock of Pi
 
-**Ghaith Khalil — One More Window**
+**Ghaith Khalil: One More Window**
 
 One More Window is a Pomodoro timer shown as a little building. Its 25 windows go dark one at a time during a work session. When the last light goes out, it is time to step away. During the five-minute break, the windows fill back up.
 
