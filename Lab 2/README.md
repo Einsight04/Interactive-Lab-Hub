@@ -100,4 +100,4 @@ This 38-second recording uses a 25-second work session and a five-second break. 
 
 ## Contributions and influences
 
-I planned the project, checked the hardware, operated the prototype, and recorded the photos and videos. AI helped me with planning and code. The IRL-CT starter and Adafruit examples provided the display setup. Pocket Blinkenlights from Lab 1 inspired the building metaphor and sketch style.
+AI helped me with planning and code. The IRL-CT starter and Adafruit examples provided the display setup. Pocket Blinkenlights from Lab 1 inspired the building metaphor and sketch style.
