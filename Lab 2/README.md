@@ -98,6 +98,6 @@ https://github.com/user-attachments/assets/8c854c35-7e04-4a99-8e9d-22fec76287d2
 
 This 38-second recording uses a 25-second work session and a five-second break. It demonstrates the interaction and ends on “READY?”
 
-## Contributions
+## Contributions and influences
 
-AI helped with the code.
+Ghaith Khalil provided project direction, checked the hardware, operated the prototype, and recorded the photos and videos. AI helped with planning and code. The IRL-CT starter and Adafruit examples provided the display setup. Pocket Blinkenlights from Lab 1 inspired the building metaphor and sketch style.
