@@ -82,7 +82,7 @@ The little character gives the wait a personality. The most useful part is that 
 
 ### Feedback from friends
 
-Summaries of feedback from Tony, Steven, and Ved, three friends outside the class.
+I had a job interview and was unable to get feedback from classmates, so I reached out to Tony, Steven, and Ved, three friends outside the class, instead. Their feedback is summarized below.
 
 #### Tony
 
@@ -95,10 +95,6 @@ Steven’s feedback highlighted that filling the building back up during the bre
 #### Ved
 
 Ved’s feedback highlighted that the last window going dark is satisfying and that waiting for a button press before starting the break is useful when someone is still finishing a task. The concern is missing the end of the session while looking away. A brief animation alongside “STEP AWAY” could make the transition easier to notice without flashing constantly.
-
-### Feedback from classmates
-
-Pending.
 
 ## Modify the barebones clock to make it your own
 
