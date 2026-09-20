@@ -70,7 +70,7 @@ The first implementation, [window_sweep.py](window_sweep.py), starts immediately
 
 ## Make a short video of your modified barebones PiClock
 
-[Watch the basic prototype](evidence/pi-basic-demo.mp4).
+https://github.com/user-attachments/assets/294393de-7d3e-4b21-b23d-9293c251a5db
 
 This 26-second recording shows the actual Pi's windows going dark and ends on “STEP AWAY.” Demo mode turns off one window per second instead of one per minute.
 
@@ -94,6 +94,6 @@ The timer uses a monotonic clock so changes to the system time do not affect the
 
 ### Final video
 
-[Watch the final timer](evidence/pi-final-demo.mp4).
+https://github.com/user-attachments/assets/8c854c35-7e04-4a99-8e9d-22fec76287d2
 
 This 38-second recording uses a 25-second work session and a five-second break. It demonstrates the interaction and ends on “READY?”
