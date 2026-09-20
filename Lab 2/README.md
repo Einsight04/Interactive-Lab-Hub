@@ -97,3 +97,7 @@ The timer uses a monotonic clock so changes to the system time do not affect the
 https://github.com/user-attachments/assets/8c854c35-7e04-4a99-8e9d-22fec76287d2
 
 This 38-second recording uses a 25-second work session and a five-second break. It demonstrates the interaction and ends on “READY?”
+
+## Contributions
+
+AI helped with the code.
