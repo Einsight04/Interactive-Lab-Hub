@@ -1,0 +1,7 @@
+/.cache/
+/.venv/
+/models/
+/voices/
+/results/
+__pycache__/
+*.pyc
