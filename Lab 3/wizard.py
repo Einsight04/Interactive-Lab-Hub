@@ -81,6 +81,16 @@ def main():
         event("state", value=value)
         print("\n" + value.upper(), flush=True)
 
+    prompts = dict(PROMPTS)
+    config = RESULTS / "prompts.json"
+    if config.exists():
+        saved = json.loads(config.read_text())
+        if not isinstance(saved, dict) or any(k not in PROMPTS or not isinstance(v, str) or not v.strip() for k, v in saved.items()):
+            raise ValueError("Invalid prompts.json: expected reply numbers and nonempty text")
+        prompts.update(saved)
+    print("Initial session or revised test? Label this session before starting.")
+    label = input("Session label (for example initial-P1 or revised-P2): ").strip()
+    event("session_metadata", label=label, prompts=prompts)
     recorder = None
     audio_device = None
     try:
@@ -98,7 +108,7 @@ def main():
             print("No microphone recording. Use an agreed phone recording for study evidence.")
         print("Controls: number or custom reply; /think; /listen; /note text; /quit.")
         print("Do not show the participant your dialogue. Wait for their full answer.")
-        for key, text in PROMPTS.items():
+        for key, text in prompts.items():
             print(f"{key}: {text}")
         state("listening")
         while True:
@@ -120,7 +130,7 @@ def main():
             if answer.startswith("/"):
                 print("Unknown command. Use /think, /listen, /note text, or /quit.")
                 continue
-            text = PROMPTS.get(answer, answer)
+            text = prompts.get(answer, answer)
             state("thinking")
             t0 = time.monotonic()
             chunks = list(voice.synthesize(text))

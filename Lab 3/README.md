@@ -142,7 +142,7 @@ This is an initial implementation. A revised storyboard and dialogue must still 
 | `/note text` | Save an observation without speaking it |
 | `/quit` | End the session and close the recording |
 
-After speaking the stop reply, the operator ends the session with `/quit`. Microphone recording requires an affirmative answer to the permission prompt. Session files remain local in `results/` and are excluded from Git.
+After speaking the stop reply, the operator ends the session with `/quit`. Microphone recording requires an affirmative answer to the permission prompt. Session files remain local in `results/` and are excluded from Git. Each session saves a label and a snapshot of the dialogue prompts used. Menu option 12 saves an observed problem and a before/after wording change, which the next controller session loads automatically. This allows the initial and revised versions to be distinguished in the evidence.
 
 **System video:** pending hardware session.  
 **Controller video or screen recording:** pending hardware session.
@@ -161,6 +161,10 @@ After speaking the stop reply, the operator ends the session with `/quit`. Micro
 **What lessons can you take away from the WoZ interactions for designing a more autonomous version?** Pending the observed interactions. The recordings and event logs will help identify useful clarification questions, corrections, and tolerable response delays before selecting an autonomous dialogue policy.
 
 **How could this create a dataset of interaction? What other sensing modalities make sense?** Each session can pair microphone audio with elapsed timestamps for device replies and state transitions. After the study, turns could be annotated as task choice, duration, clarification, correction, confirmation, or stop. The microphone also captures the speaker, so device turns must be distinguished using the event log and audio. A synchronized video could add visible hesitation and attention to the display. A physical confirmation button could provide an explicit event when speech is ambiguous. Only recordings participants agree to share should be published.
+
+### Evidence collection
+
+Menu option 11 saves experiment observations, and option 13 saves the actual findings from each participant session. [evidence.py](evidence.py) combines those notes, revision records, and measured recognition results into a local `results/report-evidence.md` worksheet through option 14. Missing results remain pending. [collect.sh](collect.sh) backs up the Pi results to the laptop without deleting the originals. These tools collect evidence; they do not replace the final interpretation or the interaction videos.
 
 ## Contributions and influences
 

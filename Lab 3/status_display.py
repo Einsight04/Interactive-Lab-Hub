@@ -21,6 +21,11 @@ def main():
     import sys
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
+    import signal
+    def stop(signum, frame):
+        raise KeyboardInterrupt
+    signal.signal(signal.SIGTERM, stop)
+    signal.signal(signal.SIGINT, stop)
     display = module.Display()
     previous = None
     try:

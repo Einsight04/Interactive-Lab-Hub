@@ -7,4 +7,5 @@ ssh -o ConnectTimeout=8 "$TARGET" 'mkdir -p /home/pi/lab-hub/"Lab 3"'
 # Copy only this lab, including downloaded models. Keep recordings and environments on the Pi.
 tar --exclude='./.venv' --exclude='./results' --exclude='__pycache__' -cf - . | ssh "$TARGET" 'tar -xf - -C /home/pi/lab-hub/"Lab 3"'
 ssh -t "$TARGET" 'cd /home/pi/lab-hub/"Lab 3" && bash setup.sh'
-printf '\nNext: ssh -t %s '''cd /home/pi/lab-hub/"Lab 3" && bash class.sh'''\n' "$TARGET"
+printf '\nDeployment finished. Open the class menu with:\n'
+printf '%s\n' "ssh -t $TARGET 'cd /home/pi/lab-hub/\"Lab 3\" && bash class.sh'"
