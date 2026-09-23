@@ -1,235 +1,167 @@
-> For setup and today's activities, open [the class kit](CLASS.md). The assignment below is preserved until the report is completed.
+# Chatterboxes: One Thing
 
-# Chatterboxes
+**Ghaith Khalil**
 
-**NAMES OF COLLABORATORS HERE**
+One Thing is a voice desk coach for the moment when several tasks feel overwhelming. It helps turn one task into a small next action that fits the time available. Instead of planning an entire day, the conversation ends with one concrete thing to start.
 
-[![Watch the video](https://user-images.githubusercontent.com/1128669/135009222-111fe522-e6ba-46ad-b6dc-d1633d21129c.png)](https://www.youtube.com/embed/Q8FWzLMobx0?start=19)
+[Setup and in-class checklist](CLASS.md)
 
-In this lab, we want you to design interaction with a speech-enabled device :  something that listens and talks to you. This device can do anything *but* control lights (since we already did that in Lab 1). First, we want you to storyboard what you imagine the conversational interaction to be like. Then you will use wizarding techniques to elicit examples of what people might say, ask, or respond. We then want you to use the examples collected from at least two other people to inform the redesign of the device.
+The software and initial design are prepared. Pi audio checks, measured results, and participant sessions are still pending.
 
-We will focus on **audio** as the main modality for interaction to start; these general techniques can be extended to **video**, **haptics** or other interactive mechanisms in the second part of the Lab.
+## Part 1
 
-A note on what you are building with. Speech interfaces are usually taught as two boxes :  speech-in, speech-out :  and that framing hides the part that actually determines whether an interaction works. Between listening and speaking sits the question of **whose turn it is**: when does the device decide you have finished talking, and how long does it make you wait before it answers? This lab gives you direct control over both, and we will ask you to notice what changes when you move them.
+### A. Text to speech
 
-## Prep for Part 1: Get the Latest Content and Pick up Additional Parts
+The greeting in [greet.sh](greet.sh) is: “Hello Ghaith. Let's find one small thing to start with today.” The script uses Piper with the `en_US-lessac-medium` voice and plays the generated WAV through the speaker. Menu option 2 compares that exact wording in espeak-ng, Festival, and Piper.
 
-Please check instructions in [prep.md](prep.md) and complete the setup before class on Wednesday.
+Piper is the initial voice choice for the prototype. The aim is a calm, conversational prompt rather than an alarm or announcement. The final choice will depend on listening to the voices on the actual speaker.
 
-### Pick up Web Camera If You Don't Have One
+**Is the same greeting in different voices the same greeting?** The words stay the same, but pace, emphasis, and intonation can change whether the invitation feels patient, commanding, or mechanical. A concrete observation from the three-voice listening comparison is pending.
 
-Students who have not already received a web camera will receive their Webcam and at the beginning of lab. If you cannot make it to class this week, please contact the TAs to ensure you get these.
+### B. Speech to text
 
-### Get the Latest Content
+[exercises.py](exercises.py) records five seconds of speech at 16 kHz, mono, PCM 16-bit. It runs the same recording through `tiny.en` and `base.en` with CPU int8 inference and beam size 1. The transcript is fully consumed before stopping the timer. Model loading is timed separately.
 
-As always, pull updates from the class Interactive-Lab-Hub to both your Pi and your own GitHub repo.
+**Real-time factor = transcription time / recording duration.** A value below 1 means transcription took less time than the recording's duration. It does not include the wait for the person to finish speaking, model loading, or spoken response generation.
 
-**\[recommended\]** Option 1: On the Pi, `cd` to your `Interactive-Lab-Hub`, pull the updates from upstream (class lab-hub) and push the updates back to your own GitHub repo. You will need the *personal access token* for this.
+| Model | Recording length | Transcription time | Real-time factor | Transcription errors |
+| --- | --- | --- | --- | --- |
+| tiny.en | Pending recording | Pending measurement | Pending measurement | Pending comparison |
+| base.en | Same recording | Pending measurement | Pending measurement | Pending comparison |
 
-```
-pi@ixe00:~$ cd Interactive-Lab-Hub
-pi@ixe00:~/Interactive-Lab-Hub $ git pull upstream Fall2026
-pi@ixe00:~/Interactive-Lab-Hub $ git add .
-pi@ixe00:~/Interactive-Lab-Hub $ git commit -m "get lab3 updates"
-pi@ixe00:~/Interactive-Lab-Hub $ git push
-```
+The exact spoken sentence and both transcripts will be added with the measured results. The accuracy-versus-delay conclusion is pending that comparison. For this design, errors in the task or the number of minutes matter because they change the proposed plan.
 
-Option 2: On your own GitHub repo, create a pull request to get updates from the class Interactive-Lab-Hub. After you have the latest updates online, go to your Pi, `cd` to your `Interactive-Lab-Hub` and use `git pull`.
+**Numerical input script:** menu option 4 runs `exercises.py number`. The Pi says, “How many minutes do you have for one small task?” Pressing Enter starts a five-second recording. The script saves the WAV, recognized answer, actual words entered for comparison, and transcription timing. It records an answer without automatically treating the recognized number as correct.
 
----
+### C. Turn-taking
 
-# Part 1
+Menu options 5, 6, and 7 run Silero VAD with silence thresholds of 0.2, 0.8, and 1.5 seconds. The comparison uses the same phrase with a thinking pause: “I want to start... my reading.” A second attempt includes a correction: “Ten... actually, fifteen minutes.”
 
-## Setup
+| Silence threshold | What to observe | Actual observation |
+| --- | --- | --- |
+| 0.2 seconds | Whether thinking pauses or corrections split the response | Pending Pi experiment |
+| 0.8 seconds | Whether the whole answer is retained without an awkward wait | Pending Pi experiment |
+| 1.5 seconds | How the delay after finishing changes the device's apparent responsiveness | Pending Pi experiment |
 
-Create and activate a virtual environment for this lab:
+The initial dialogue uses 0.8 seconds as a starting assumption. The experiment will determine whether it suits this task. Menu option 8 runs the complete listen, transcribe, and echo loop so the combined delay can be heard.
 
-```
-pi@ixe00:~$ cd Interactive-Lab-Hub/Lab\ 3
-pi@ixe00:~/Interactive-Lab-Hub/Lab 3 $ python3 -m venv .venv
-pi@ixe00:~/Interactive-Lab-Hub/Lab 3 $ source .venv/bin/activate
-(.venv) pi@ixe00:~/Interactive-Lab-Hub/Lab 3 $
-```
+### D. Design and storyboard
 
-Install the Python dependencies:
+Three possible directions were a speaking Pomodoro timer, a checklist reader, and a next-step coach. The coach gives speech a more useful role: a person can explain uncertainty, revise the task, and correct a number instead of only issuing a fixed command.
 
-```
-(.venv) $ pip install -r requirements.txt
-```
+The first design follows task, available time, smallest step, and confirmation. Explicit confirmation makes corrections part of the interaction. The device stops speaking once the person is ready to begin.
 
-This takes a few minutes. If you would like it to take considerably less time, [`uv`](https://docs.astral.sh/uv/) is a drop-in replacement for `pip` that is dramatically faster on the Pi:
+### Storyboard
 
-```
-(.venv) $ pip install uv && uv pip install -r requirements.txt
-```
+![Proposed six-scene interaction](storyboard.svg)
 
-Then run the setup script, which installs the classic speech synthesizers, downloads the voice activity detection model, and pre-fetches a neural voice and a speech recognition model so you are not waiting on downloads during lab:
+| Scene | Person | Device |
+| --- | --- | --- |
+| 1. Stuck at the desk | Looks at several unfinished tasks and asks for help starting. | “What is one thing you want to get started on?” |
+| 2. Choose something | “I have to work on my lab report.” | Waits for the full response, then asks how many minutes are available. |
+| 3. Make it manageable | “About ten.” | “What is the smallest first step you could take?” |
+| 4. Confirm | “Write the first paragraph.” | “Ten minutes to draft the first paragraph. Does that sound right?” |
+| 5. Correct or begin | “Actually, I should choose the photos first.” | Revises the plan and confirms it again. |
+| 6. Start | Agrees and begins the selected task. | “Ready when you are.” Stops speaking. |
 
-```
-(.venv) $ ./setup.sh
-```
+### Dialogue and pauses
 
-Check your audio devices before going further. `arecord -l` lists capture devices and `aplay -l` lists playback devices; if your webcam microphone or Bluetooth speaker does not appear, fix that first :  every script below assumes the system defaults are the ones you want.
+The following is an anticipated example, not a record of a participant session.
 
-## A. Text to Speech
+**Device:** What is one thing you want to get started on?  
+**[Wait for speech. Allow at least 0.8 seconds of silence after the answer. Allow longer if the person seems to be thinking.]**  
+**Person:** My lab report.  
+**Device:** How many minutes do you have?  
+**[Wait for the whole numerical response, then 0.8 seconds.]**  
+**Person:** Ten.  
+**Device:** What is the smallest first step you could take?  
+**[Wait. Do not fill a thinking pause immediately.]**  
+**Person:** Write the introduction... actually, choose the photos first.  
+**Device:** Ten minutes to choose the photos. Does that sound right?  
+**[Wait for confirmation or correction.]**  
+**Person:** Yes.  
+**Device:** Ready when you are. You can begin, or tell me what to change.
 
-Your Pi can speak in several quite different ways, and the differences are audible in a way that matters for design. In `speech-scripts/` there are shell scripts for each.
+The initial 0.8-second threshold is a starting assumption to compare against the Part C experiments. In the wizard study, the designer uses context rather than enforcing it as a hard cutoff. After about five seconds with no answer, ask once, “Would you like more time?” Then wait. If the user says stop, end the conversation immediately.
 
-### The classic engines
+### Alternatives
 
-```
-(.venv) $ cd speech-scripts
+- Unclear number: “Was that fifteen or fifty minutes?” Confirm rather than guess.
+- Too large a step: “What could you do in just the first two minutes?”
+- No task in mind: “Would you like to start with study, chores, or something else?”
+- Correction: repeat the corrected plan and ask for confirmation.
+- Already finished: “Would you like another step, or are you done for now?”
 
-(.venv) $ sudo apt update
-(.venv) $ sudo apt install -y espeak festival festvox-kallpc16k
 
-(.venv) $ ./espeak_demo.sh
-(.venv) $ ./festival_demo.sh
-```
+### E. Acting out the dialogue
 
-You can run these `.sh` files by typing `./filename`, and read one with `cat filename`. You can also play audio files directly with `aplay filename` :  try `aplay lookdave.wav`.
+The participant will receive this introduction: “This helps you choose a small next step. Try it using something you actually need to do.” The dialogue and operator controls stay out of their view. The operator selects or types device replies after hearing the participant's full response.
 
-These are all decades-old technology and they sound like it. `espeak-ng` is a *formant synthesizer*: it generates speech from an acoustic model of the vocal tract, which is why it sounds robotic but also why the whole thing fits in a couple of megabytes and responds instantly. `festival` is *concatenative*: they stitch together recorded fragments of a real speaker, which sounds more human but breaks audibly at the seams.
+The interaction will be recorded with permission. Afterward, the participant will be asked where they felt interrupted or stuck, whether the proposed step was useful, and what they thought the device could understand.
 
-### Neural TTS with Piper
+**Interaction video:** pending.  
+**Difference between the imagined and actual dialogue:** pending the first partner session.  
+**Revision based on that session:** pending.
 
-Note that the Piper command line changed in version 1.x :  voices are now downloaded explicitly with `python3 -m piper.download_voices`, and you invoke it as `python3 -m piper`. Tutorials you find online may show the old `echo ... | piper --model ...` form, which no longer works. Browse the [voice samples](https://rhasspy.github.io/piper-samples) and download a different one if you'd like:
+## Part 2
 
-```
-(.venv) $ python3 -m piper.download_voices en_US-lessac-medium
-```
+### Prototype and additional modality
 
-[Piper](https://github.com/OHF-Voice/piper1-gpl) synthesizes speech with a small neural network, runs comfortably on the Pi 5, and sounds markedly better than the above.
+The prepared prototype uses a Raspberry Pi 5, USB microphone, USB speaker, and optionally the existing Mini PiTFT. [wizard.py](wizard.py) is the controller. The operator listens to the person, chooses a preset or writes a custom reply, and Piper speaks it through the Pi. The voice stays loaded between turns to avoid reloading it for every reply.
 
-```
-(.venv) $ ./piper_demo.sh
-```
+The microphone can record the interaction to a local WAV. Timestamped events capture device states, spoken replies, synthesis time, and operator notes. The operator supplies the dialogue decisions; this is a Wizard of Oz prototype, not an autonomous assistant. Whisper and VAD are used in the separate speech experiments.
 
-The demo script also shows `--output-raw`, which streams audio to the speaker as it is generated rather than writing a file first. Listen for the difference in how quickly speech begins. In a conversational system this gap is the thing your user experiences as responsiveness.
+The optional display in [status_display.py](status_display.py) adds text and color:
 
-\*\***Write your own shell file to use your favorite of these TTS engines to have your Pi greet you by name.**\*\*
-(This shell file should be saved to your own repo for this lab.)
+| State | Screen message | Meaning |
+| --- | --- | --- |
+| Loading | GETTING READY | Voice is loading |
+| Listening | LISTENING / Your turn | The operator is waiting for the participant |
+| Thinking | THINKING / Please wait | The operator is deciding, or a reply is being synthesized |
+| Speaking | SPEAKING / My turn | The Pi is playing a reply |
+| Idle | ONE THING / Ready when you are | No active conversation |
 
-\*\***Then answer: Is the same greeting, in these different voices, the same greeting? Describe one concrete way the voice changed what the utterance seemed to mean or who seemed to be speaking.**\*\*
+“Listening” indicates the conversational turn, not the microphone recording status. If recording is enabled, it runs throughout the session, including device replies. `/think` and `/listen` let the operator explicitly change the state; speaking and synthesis states change automatically. This makes the intended turn visible without relying on color alone.
 
-## B. Speech to Text
+[screen_session.sh](screen_session.sh) temporarily stops an active Lab 2 screen service and restores it when the session ends. It reuses the installed Lab 2 display environment. The screen integration is prepared but has not yet been checked on the Pi.
 
-We use [faster-whisper](https://github.com/SYSTRAN/faster-whisper), a reimplementation of OpenAI's Whisper model that runs several times faster on CPU and does not require PyTorch. All processing happens on the Pi; nothing is sent to a server.
+This is an initial implementation. A revised storyboard and dialogue must still follow the actual Part 1 findings.
 
-```
-(.venv) $ python transcribe.py lookdave.wav
-```
+### Controller
 
-The transcript is not the interesting output here :  the timings are. Run it again with a larger model and compare:
+| Input | Action |
+| --- | --- |
+| 1 / 2 / 3 | Ask for a task / available minutes / smallest step |
+| 4 | Ask the person to repeat |
+| 5 | Offer a smaller step or different task |
+| 6 | Invite the person to begin |
+| 7 | Say the conversation can stop |
+| 8 | Ask whether more thinking time is needed |
+| Any other text | Speak a custom response, including a confirmation or correction |
+| `/think` / `/listen` | Change the visible conversational state |
+| `/note text` | Save an observation without speaking it |
+| `/quit` | End the session and close the recording |
 
-```
-(.venv) $ python transcribe.py lookdave.wav --model base.en
-(.venv) $ python transcribe.py lookdave.wav --model small.en
-```
+After speaking the stop reply, the operator ends the session with `/quit`. Microphone recording requires an affirmative answer to the permission prompt. Session files remain local in `results/` and are excluded from Git.
 
-Available sizes, smallest first: `tiny.en`, `base.en`, `small.en`, `medium.en`. The `.en` variants are English-only and faster than their multilingual counterparts at the same size.
+**System video:** pending hardware session.  
+**Controller video or screen recording:** pending hardware session.
 
-\*\***Record a few seconds of your own speech (`arecord -d 5 -f cd -c 1 -r 16000 test.wav`) and transcribe it with at least two model sizes. Report the real-time factor for each. At what point does the accuracy improvement stop being worth the delay, for a system that has to answer you?**\*\*
+### User testing
 
-\*\***Write your own script that verbally asks for a numerical input (a phone number, zipcode, number of pets) and records the answer the respondent provides.**\*\* Numbers are a good stress test :  transcription systems make characteristic errors on digit strings, and you will want to know what they are before you design around them.
+| Session | Interaction and evidence | Findings and resulting change |
+| --- | --- | --- |
+| Participant 1, revised prototype | Pending | Pending |
+| Participant 2, revised prototype | Pending | Pending |
 
-## C. Turn-taking: knowing when someone has stopped talking
+**What worked well about the system and what didn't?** Pending actual interactions. The study will check whether the next step feels manageable and whether confirmation handles corrections clearly.
 
-Everything so far has worked on fixed audio files. A real conversational device does not get told when to start and stop recording :  it has to decide. This is the problem that makes speech interfaces hard, and it is mostly not a speech recognition problem.
+**What worked well about the controller and what didn't?** Pending operator use during the study. The main questions are whether preset replies are sufficient and whether typing a custom confirmation creates noticeable silence.
 
-We use a **voice activity detector** (VAD) to segment the microphone stream into utterances. `listen.py` runs Silero VAD continuously and hands each detected utterance to faster-whisper:
+**What lessons can you take away from the WoZ interactions for designing a more autonomous version?** Pending the observed interactions. The recordings and event logs will help identify useful clarification questions, corrections, and tolerable response delays before selecting an autonomous dialogue policy.
 
-```
-(.venv) $ cd speech-scripts
-(.venv) $ python listen.py
-```
+**How could this create a dataset of interaction? What other sensing modalities make sense?** Each session can pair microphone audio with elapsed timestamps for device replies and state transitions. After the study, turns could be annotated as task choice, duration, clarification, correction, confirmation, or stop. The microphone also captures the speaker, so device turns must be distinguished using the event log and audio. A synchronized video could add visible hesitation and attention to the display. A physical confirmation button could provide an explicit event when speech is ambiguous. Only recordings participants agree to share should be published.
 
-Speak, pause, and watch it transcribe. Now change the endpointing threshold :  the amount of silence the system requires before it decides your turn is over:
+## Contributions and influences
 
-```
-(.venv) $ python listen.py --min-silence 0.2
-(.venv) $ python listen.py --min-silence 1.5
-```
-
-\*\***Try both extremes, and something in between. Describe what each one feels like to talk to. Note specifically: at 0.2s, what kinds of normal speech get cut off? At 1.5s, what does the delay make the system seem like?**\*\*
-
-There is no correct value. A system that takes drink orders and a system that listens to someone think out loud want very different thresholds, and the right one depends on what your users are doing with their pauses.
-
-### The complete loop
-
-`echo_bot.py` puts the pieces together: it listens, endpoints, transcribes, and speaks a reply through Piper. The dialogue policy is deliberately trivial :  it repeats what you said :  so that everything you notice is a property of the timing rather than the content.
-
-```
-(.venv) $ python echo_bot.py
-```
-
-## D. Storyboard
-
-Storyboard and/or use a Verplank diagram to design a speech-enabled device. (Stuck? Make a device that talks for dogs. If that is too stupid, find an application that is better than that.)
-
-\*\***Post your storyboard and diagram here.**\*\*
-
-Write out what you imagine the dialogue to be. Use cards, post-its, or whatever method helps you develop alternatives or group responses.
-
-\*\***Please describe and document your process.**\*\*
-
-Your script should include the pauses. Where does your device wait, and for how long? You now know from Part C that this is a parameter you have to choose, not something that happens for free.
-
-## E. Acting out the dialogue
-
-Find a partner, and *without sharing the script with your partner* try out the dialogue you've designed, where you (as the device designer) act as the device you are designing. Please record this interaction (for example, using Zoom's record feature).
-
-\*\***Describe if the dialogue seemed different than what you imagined when it was acted out, and how.**\*\*
-
-
----
-
-# Lab 3 Part 2
-
-For Part 2, you will redesign the interaction with the speech-enabled device using the data collected, as well as feedback from part 1.
-
-## Prep for Part 2
-
-1. What are concrete things that could use improvement in the design of your device? For example: wording, timing, anticipation of misunderstandings.
-2. What are other modes of interaction *beyond speech* that you might also use to clarify how to interact? In particular: how does someone know when the device is listening, and when it is thinking? You have a screen and an LED.
-3. Make a new storyboard, diagram and/or script based on these reflections.
-4. (optional) Integrate [input devices](inputs.md) in the system
-
-## Prototype your system
-
-The system should:
-* use the Raspberry Pi
-* use one or more sensors
-* require participants to speak to it
-
-*Document how the system works.*
-
-*Include videos or screencaptures of both the system and the controller.*
-
-## Test the system
-
-Try to get at least two people to interact with your system. (Ideally, you would inform them that there is a wizard *after* the interaction, but we recognize that can be hard.)
-
-Answer the following:
-
-### What worked well about the system and what didn't?
-\*\**your answer here*\*\*
-
-### What worked well about the controller and what didn't?
-\*\**your answer here*\*\*
-
-### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
-\*\**your answer here*\*\*
-
-### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
-\*\**your answer here*\*\*
-
-<details>
-  <summary><strong>Submission Cleanup Reminder (Click to Expand)</strong></summary>
-
-  **Before submitting your README.md:**
-  - This readme.md file has a lot of extra text for guidance.
-  - Remove all instructional text and example prompts from this file.
-  - You may either delete these sections or use the toggle/hide feature in VS Code to collapse them for a cleaner look.
-  - Your final submission should be neat, focused on your own work, and easy to read for grading.
-</details>
+AI helped me with planning and code. The [IRL-CT Lab 3 starter](https://github.com/IRL-CT/Interactive-Lab-Hub/tree/Fall2026-shadow/Lab%203) provided the speech exercises and setup. The display uses the Mini PiTFT setup from Lab 2. One Thing extends the focus-on-work theme into choosing how to begin.

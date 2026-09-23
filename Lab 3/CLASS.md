@@ -31,8 +31,8 @@ Open the same menu over SSH. The scripts process speech locally.
 - **4: Numerical input.** The Pi asks how many minutes you have, then records your spoken answer after Enter. Try a number spoken naturally and compare the transcript to the real answer.
 - **5, 6, 7: Turn-taking.** Try “I want to start... [pause] my reading” and a longer explanation at each silence setting. Note premature cuts and the feeling of delay. Ctrl+C returns to the menu.
 - **8: Echo bot.** Say one short sentence and listen for the response gap.
-- Read the proposed storyboard and dialogue in [DESIGN.md](DESIGN.md). Adjust it after the exercises.
-- **9: Act it out.** Ask a partner to try the desk coach without showing them the script. Ask permission to record a phone video with audible speech. Use the controller to select or type spoken replies. Record what surprised you and what you would change. The controller log alone is not an interaction recording.
+- Read the proposed storyboard and dialogue in [the report](README.md#d-design-and-storyboard). Adjust it after the exercises.
+- **9: Act it out.** Ask a partner to try the desk coach without showing them the script. Ask permission to record a phone video with audible speech. Use the controller to select or type spoken replies. Record what surprised you and what you would change. Option 9 offers microphone recording after permission; also take a phone video. Type `/note your observation` to save a note without speaking it. End with `/quit`. Option 10 adds the Mini PiTFT status screen if its hardware check passes.
 
 Recordings and measurements are in `results/` on the Pi and are excluded from Git. Copy them back to the Mac after class:
 
@@ -56,6 +56,18 @@ ssh pi 'cd /home/pi/lab-hub/"Lab 3" && tar -cf - results' | tar -xf -
 
 ## Part 2 later
 
-Use Part 1 observations to revise the storyboard and interaction. Add a visible listening/thinking/speaking indication or another useful modality. Test the revised Pi prototype with at least two people. Capture videos of both the device and controller, then answer the reflection questions in the assignment README. These activities are still to be completed.
+Use Part 1 observations to revise the storyboard and interaction. Check the prepared listening/thinking/speaking screen in option 10 and revise it as needed. Test the revised Pi prototype with at least two people. Capture videos of both the device and controller, then answer the reflection questions in the assignment README. These activities are still to be completed.
 
-The course assignment is preserved in [README.md](README.md). Before submission, replace its instructional material with the completed report and real evidence.
+The [report](README.md) has the prepared design and implementation inline. Its pending sections need actual results and recordings before submission.
+
+## Suggested class order
+
+1. **5 minutes:** audio check and three voices (options 1 and 2).
+2. **10 minutes:** recognition comparison and numerical answer (3 and 4).
+3. **10 minutes:** three silence thresholds, then the echo bot (5 through 8).
+4. **10 minutes:** one partner session with option 9, phone video, and short follow-up questions.
+5. **5 minutes:** record the main surprise and a specific design change. Keep the measurements and video.
+
+These are planning estimates, not a course time requirement. Part 1 needs a partner interaction. The two-user test of the revised design belongs to Part 2; do it after revising from Part 1, if there is time today, or during the next session.
+
+For each participant, note: session file name, task they chose, exact words around any misunderstanding, where the device interrupted or delayed them, their answer to “What would you change?”, and the revision you made. Keep the script hidden during the interaction.
