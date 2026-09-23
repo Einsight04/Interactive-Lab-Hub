@@ -53,7 +53,7 @@ The first design follows task, available time, smallest step, and confirmation. 
 
 ### Storyboard
 
-![Proposed six-scene interaction](storyboard.svg)
+![Proposed six-scene interaction](images/storyboards.png)
 
 | Scene | Person | Device |
 | --- | --- | --- |
