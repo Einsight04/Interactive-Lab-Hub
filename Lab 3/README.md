@@ -6,13 +6,13 @@
 
 One Thing is a small desk companion for when there is too much to do and nothing gets started. It asks what we want to work on, how much time we have, and what the smallest first step could be. It reads that step back, lets us change it, and then stays quiet so we can begin.
 
-## Prep
+# Part 1
+
+## Setup
 
 We used a Raspberry Pi 5, a USB microphone, a USB speaker, and the Mini PiTFT from Lab 2. The microphone is our sensor. The screen shows whose turn it is, and its two buttons let us confirm a plan, change it, or stop the device.
 
 We followed [prep.md](prep.md) and checked the microphone, speaker, and screen together. The Pi detected both USB audio devices, played a spoken greeting, and captured microphone audio without overflow.
-
-# Part 1
 
 ## A. Text to Speech
 
@@ -43,7 +43,7 @@ We ran the same recording through tiny.en and base.en on the Pi. Both used int8 
 
 The numbers were less reliable during the live demonstration. “Fifteen minutes” became “in minutes,” so the number disappeared. In a separate speaker-to-microphone replay, fifteen became `50`. That is why we kept the spoken readback. In our scripted demonstration, the plan used the agreed values; the system did not work out the missing number by itself.
 
-## C. Turn-taking
+## C. Turn-taking: knowing when someone has stopped talking
 
 We replayed our Part B recording into Silero VAD at three silence settings. This kept the words and pauses the same each time. We supplied the audio in 512-sample blocks at 16 kHz and added two seconds of silence at the end. These were recorded-audio comparisons, not three live conversations. [Our measurements](media/turntaking-measurements.json).
 
@@ -59,7 +59,9 @@ All three kept the whole sentence and produced the same transcript. Going from 0
 
 **What does 1.5 seconds change?** It gives us more room to think, but also leaves more silence before the device answers. Without a listening indicator, that gap could look like the device missed the answer. We chose 0.8 seconds as our starting point and made the listening state visible. We did not collect live ratings of how each setting felt.
 
-**The complete loop:** With the 0.8-second setting, recognition took 1.059 seconds. Piper needed another 0.557 seconds to produce the first audio chunk of an echo reply. Adding the silence setting gives roughly 2.42 seconds before a reply could begin, before audio buffering and scheduling. This is an estimate from the components, not a measured live `echo_bot.py` conversation. Our rehearsal also showed that waiting for an operator through chat can add much more delay than the speech software itself.
+### The complete loop
+
+With the 0.8-second setting, recognition took 1.059 seconds. Piper needed another 0.557 seconds to produce the first audio chunk of an echo reply. Adding the silence setting gives roughly 2.42 seconds before a reply could begin, before audio buffering and scheduling. This is an estimate from the components, not a measured live `echo_bot.py` conversation. Our rehearsal also showed that waiting for an operator through chat can add much more delay than the speech software itself.
 
 ## D. Storyboard
 
@@ -114,9 +116,9 @@ We acted it out together. One of us asked the device's questions, and the other 
 
 That was the useful difference from our written script. Time available and time needed are not always the same. We kept editable replies and a plan readback so the wizard can handle that adjustment instead of forcing the conversation through a fixed set of answers.
 
-# Part 2
+# Lab 3 Part 2
 
-## What we changed
+## Prep for Part 2
 
 We wanted three things to be clearer: when the device had heard an answer, what plan it was proposing, and how to change that plan.
 
@@ -141,7 +143,7 @@ The plan gets its own screen with the first step and number of minutes. The top 
 | Correction | Asks what should change, then reads back the new plan. | Gives the correction aloud. |
 | Finish | Says “Ready when you are. One small step is enough.” | Starts the task. |
 
-## Our prototype
+## Prototype your system
 
 We built the controller in [wizard.py](wizard.py), the Pi screen in [device_ui.py](device_ui.py), and the laptop interface in [controller.html](controller.html).
 
@@ -197,11 +199,11 @@ Our service file uses the `pi` account and `/home/pi/lab-hub/Lab 3`. Stop it wit
 
 </details>
 
-## Testing and reflections
+## Test the system
 
 We recorded a walkthrough with one of us. We did not test the prototype with two people outside our group.
 
-**What worked well about the system, and what didn't?**
+### What worked well about the system and what didn't?
 
 We got through the whole correction. The first plan was choosing photos. The bottom button opened the correction, and the top button confirmed writing the introduction instead. Keeping the plan on screen made it clear what was being accepted.
 
@@ -209,19 +211,19 @@ Recognition was the weak point. In the recording, “My lab report” became “
 
 We also caught a timing problem: LISTENING appeared before the microphone's short settling period had finished. An immediate answer could lose its beginning. After the recording, we changed the code to keep the speaking cue visible until the microphone is ready. Our video shows the earlier version.
 
-**What worked well about the controller, and what didn't?**
+### What worked well about the controller and what didn't?
 
 The preset questions kept the common replies close at hand. We could still type a different reply or change the plan. Stop cancelled speech and pending replies, which mattered when a turn needed to be restarted.
 
 The first rehearsal was too slow because each turn was being triggered through chat. The prepared sequence made the recorded take quicker, but it only covered our agreed script. We have not measured how quickly a wizard could handle an unexpected answer through the browser.
 
-**What would we take into a more autonomous version?**
+### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
 
 Hearing that a turn ended is different from understanding it. We would keep task, time, and first step as separate fields and confirm them before moving on. Missing numbers should cause another question. A correction should update the relevant field and trigger another readback. We would keep the buttons as a simple way to accept or change a plan when speech recognition gets something wrong.
 
 These lessons come from our own walkthrough, not an independent user study.
 
-**How could we build a dataset from this?**
+### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
 
 Our session logs already store replies, automatic transcripts, turn lengths, plan changes, button presses, and notes. With permission, we could add synchronized audio and correct the transcripts against it. That would let us compare what someone said with what the system heard and what the wizard did next.
 
