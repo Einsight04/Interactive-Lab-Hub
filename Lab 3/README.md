@@ -1,6 +1,6 @@
 # Chatterboxes
 
-**Ghaith Khalil and TODO (partner): One Thing**
+**Ghaith Khalil and Aryan: One Thing**
 
 One Thing is a voice desk companion for the moment when there is too much to do and nothing gets started. It asks what you want to work on, how much time you have, and what the smallest first step is. Then it stops talking so you can start. The conversation ends with one concrete thing to do, not a plan for the whole day.
 
@@ -125,15 +125,17 @@ The 0.8 s pause is a starting guess, to be checked against Part C. The pause bef
 
 ## E. Acting out the dialogue
 
-One of us plays the device from a script the other person has not seen. The participant is told only: "This helps you choose a small next step. Try it with something you actually need to do."
+We acted out the conversation together, with one of us asking the device's questions and the other responding with a task: starting work on a startup. The conversation moved from 20 minutes available to a smaller first step, writing down ten ideas, that would take ten minutes.
 
-**Partner:** TODO
+[![Acted-out dialogue with Ghaith and Aryan](images/acted-dialogue-poster.jpg)](media/acted-dialogue.mp4)
 
-**Video:** TODO
+[Watch or download the MP4](media/acted-dialogue.mp4) · [Original video on YouTube](https://www.youtube.com/watch?v=CZMEIBN0Yo8)
 
 **Did the dialogue seem different than imagined, and how?**
 
-TODO
+The acted conversation was less rigid than the written script. Instead of immediately repeating the original time, the device role asked a follow-up about how long the proposed first step would take. That changed the plan from 20 minutes available to ten minutes for writing ideas. The distinction matters: available time and the time needed for the first step are not necessarily the same.
+
+The conversation still reached a concrete action quickly, but the follow-up showed why the controller needs editable replies and a plan readback. A fixed sequence that blindly carries the first number forward would miss this adjustment. In the prototype, the wizard can ask a follow-up, change the plan's duration, and read it back before confirmation.
 
 ---
 
@@ -143,7 +145,7 @@ TODO
 
 **1. What could be improved (wording, timing, misunderstandings)?**
 
-The implementation needed visible acknowledgement of a finished turn, an explicit readback before committing to a plan, a way to correct that plan, and a stop control that also cancels pending work. These changes are implemented below. The Part E reflection still needs to be added from the recorded session.
+The acted dialogue showed a distinction between time available and time needed for the first step: 20 minutes became ten after a follow-up. The revised interaction keeps the plan editable and reads it back before confirmation. The implementation also needed visible acknowledgement of a finished turn, a way to correct the plan, and a stop control that cancels pending work.
 
 **2. Modes of interaction beyond speech: how does someone know when the device is listening and when it is thinking?**
 
@@ -157,14 +159,14 @@ A separate confirmation screen shows the first step, the number of minutes, and 
 
 **3. Revised script**
 
-This revision addresses implementation issues identified while building the prototype. It has not been validated with two other participants.
+This revision incorporates the adjustable time and follow-up from the acted dialogue, along with implementation checks. It has not been validated with two other participants.
 
 | Moment | Device and screen | Person |
 | --- | --- | --- |
 | Start | Wizard selects the task prompt. Blue SPEAKING becomes green LISTENING. | Says what they want to work on. |
 | End of turn | After 0.8 seconds of silence, the display changes to amber THINKING. The controller receives an automatic transcript. | Sees that their turn registered. |
 | Time | Wizard asks how many minutes are available. | Gives a number, possibly with a correction. |
-| Clarify | Wizard asks about an ambiguous number instead of committing to the transcript. | Clarifies the intended time. |
+| Clarify | Wizard asks about an ambiguous number or distinguishes time available from time needed for the step. | Clarifies the intended time. |
 | First step | Wizard asks for the smallest first step, or offers a smaller step if needed. | Chooses something concrete. |
 | Readback | Device speaks the plan and displays a task card. | Top button confirms; bottom button requests a correction. |
 | Correct | Device asks what should change. Wizard updates the plan and reads it back again. | Gives the correction aloud. |
@@ -188,7 +190,7 @@ The controller provides preset questions, custom spoken replies, the latest tran
 | Confirm or request a change | Participant buttons, or the wizard on their behalf |
 | Stop playback and cancel pending work | Participant bottom button or controller Stop |
 
-Hardware verification completed on the Pi: microphone endpointing and transcription, interruption during active speech, spoken plan readback reaching the confirmation state, confirmation reaching the ready state, and browser Listen/Stop controls. Invalid plans and out-of-order confirmations are rejected. Physical button presses still need checking during the demonstration. Replaying a quiet recording through the speaker produced recognition errors, so automatic transcripts remain suggestions for the wizard.
+Hardware verification completed on the Pi: microphone endpointing and transcription, interruption during active speech, spoken plan readback reaching the confirmation state, confirmation reaching the ready state, and browser Listen/Stop controls. Invalid plans and out-of-order confirmations are rejected. The recorded demonstration also verified the physical bottom-button correction and top-button confirmation. Replaying a quiet recording through the speaker produced recognition errors, so automatic transcripts remain suggestions for the wizard.
 
 ### Running the prototype
 
@@ -213,7 +215,11 @@ Open `http://localhost:5050`. The web server listens only on the Pi's loopback i
 
 Each session writes `results/session-*.jsonl` with state changes, transcript text and timing, spoken replies, plan edits, button events, and notes. Raw microphone audio is not retained by this controller. The phone recording supplies the physical interaction evidence. After exiting the prototype, `sudo systemctl start window-clock.service` restores Lab 2.
 
-**Video of the system:** TODO: solo demonstration.
+**Video of the system:** [Watch the 47-second demonstration](media/one-thing-demo.mp4).
+
+[![Pi demonstration: correcting and confirming the first step](images/demo-poster.jpg)](media/one-thing-demo.mp4)
+
+The recording shows the spoken task, time, and first step; the bottom-button correction; and the top-button confirmation of the revised plan. It is a scripted solo demonstration. To avoid delays from operating through chat, a predetermined operator sequence advanced after each recognized turn and submitted the agreed plan values. This was not autonomous interpretation of the conversation. [Timestamped events from this take](media/demo-events.jsonl) document the state transitions and button presses.
 
 **Screen recording of the controller:** TODO.
 
@@ -223,19 +229,23 @@ Testing with two other people has not been completed. The demonstration is a sol
 
 | Participant | Video | Notes |
 | --- | --- | --- |
-| Solo demonstration | Pending recording | Demonstrates the interaction; not an independent user study. |
+| Solo demonstration | [Video](media/one-thing-demo.mp4) | Spoken plan, bottom-button correction, and top-button confirmation; not an independent user study. |
 
 ### What worked well about the system and what didn't?
 
-TODO
+The solo demonstration completed the full correction path: the first plan was to choose photos, the bottom button requested a change, and the top button confirmed the revised introduction step. The task card made the proposed action visible before committing. Both physical button events are present in the log.
+
+Recognition was less reliable than the earlier fixed-recording comparison. During this take, the live transcript rendered "My lab report" as "of my library for it" and lost the number in "Fifteen minutes." The known demonstration script let the operator continue, but a general conversation would need a clarification instead. The microphone settling period also continues briefly after LISTENING appears, which can miss the beginning of an immediate answer. That timing should be aligned before relying on the screen cue in an autonomous version.
 
 ### What worked well about the controller and what didn't?
 
-TODO
+Preset replies, editable plan fields, and visible transcripts separate the wizard's decisions from the device's output. Stop cancels playback and invalidates pending replies, and the event log makes the conversation timing inspectable.
+
+Operating every turn through chat was too slow in the first rehearsal. For the recorded take, the agreed sequence advanced as soon as each transcript arrived. This reduced operator delay but only demonstrates that specific script. It does not establish how quickly a wizard could handle an unexpected answer through the browser. A recording of the browser controller is still needed to show that interface directly.
 
 ### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
 
-TODO
+The solo walkthrough highlights the gap between detecting a completed turn and understanding it. A future autonomous version needs separate representations for task, time, and first step, with explicit confirmation before accepting them. Missing or ambiguous numbers should trigger a question, not a guessed plan. Corrections should replace the relevant field and repeat the readback. The button path provides a clear way to correct or confirm a plan even when recognition is unreliable. These are implementation lessons from this walkthrough, not findings from an independent user study.
 
 ### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
 

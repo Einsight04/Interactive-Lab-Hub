@@ -1,0 +1,40 @@
+{"t": 0.0, "event": "note", "text": "Solo recording retake. Scripted operator sequence advances on completed spoken turns; plan values follow the agreed demonstration script."}
+{"t": 0.06, "event": "state", "state": "speaking"}
+{"t": 2.99, "event": "state", "state": "listening"}
+{"t": 5.62, "event": "state", "state": "thinking"}
+{"t": 5.62, "event": "turn_ended", "speech_seconds": 1.15}
+{"t": 6.46, "event": "transcript", "text": "of my library for it.", "seconds": 0.84}
+{"t": 6.57, "event": "reply", "text": "How many minutes do you have?"}
+{"t": 6.85, "event": "state", "state": "speaking"}
+{"t": 8.61, "event": "state", "state": "listening"}
+{"t": 10.53, "event": "state", "state": "thinking"}
+{"t": 10.53, "event": "turn_ended", "speech_seconds": 0.57}
+{"t": 11.35, "event": "transcript", "text": "in minutes.", "seconds": 0.82}
+{"t": 11.47, "event": "reply", "text": "What is the smallest first step you could take?"}
+{"t": 11.85, "event": "state", "state": "speaking"}
+{"t": 14.26, "event": "state", "state": "listening"}
+{"t": 16.75, "event": "state", "state": "thinking"}
+{"t": 16.75, "event": "turn_ended", "speech_seconds": 0.7}
+{"t": 17.61, "event": "transcript", "text": "the photos.", "seconds": 0.85}
+{"t": 17.7, "event": "plan", "task": "Lab report", "step": "choose the photos", "minutes": 15}
+{"t": 17.7, "event": "reply", "text": "15 minutes to choose the photos. Does that sound right? Press the top button to confirm, or the bottom button to change it."}
+{"t": 18.03, "event": "state", "state": "speaking"}
+{"t": 25.96, "event": "state", "state": "confirm"}
+{"t": 27.24, "event": "button", "button": "B"}
+{"t": 27.24, "event": "state", "state": "thinking"}
+{"t": 27.24, "event": "reply", "text": "Of course. What would you like to change?"}
+{"t": 27.4, "event": "state", "state": "speaking"}
+{"t": 30.16, "event": "state", "state": "listening"}
+{"t": 33.4, "event": "state", "state": "thinking"}
+{"t": 33.4, "event": "turn_ended", "speech_seconds": 1.91}
+{"t": 34.29, "event": "transcript", "text": "So we can choose the introduction first.", "seconds": 0.89}
+{"t": 34.47, "event": "plan", "task": "Lab report", "step": "write the introduction", "minutes": 15}
+{"t": 34.47, "event": "reply", "text": "15 minutes to write the introduction. Does that sound right? Press the top button to confirm, or the bottom button to change it."}
+{"t": 34.86, "event": "state", "state": "speaking"}
+{"t": 43.09, "event": "state", "state": "confirm"}
+{"t": 43.86, "event": "button", "button": "A"}
+{"t": 43.86, "event": "confirmed"}
+{"t": 43.86, "event": "state", "state": "thinking"}
+{"t": 43.86, "event": "reply", "text": "Ready when you are. One small step is enough."}
+{"t": 44.05, "event": "state", "state": "speaking"}
+{"t": 46.99, "event": "state", "state": "ready"}
