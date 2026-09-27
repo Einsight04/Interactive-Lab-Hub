@@ -35,20 +35,22 @@ The Pi detects the USB PnP Sound Device microphone and UACDemoV1.0 speaker. ALSA
 
 ## B. Speech to Text
 
-**Real-time factor for our own recording** (`arecord -d 5 -f S16_LE -c 1 -r 16000 test.wav`, then `python speech-scripts/transcribe.py test.wav --model ...`):
+**Real-time factor for our own recording**
 
-What was said: **TODO**
+[Listen to the microphone recording](audio/own-speech.wav)
+
+The recording is nine seconds long, including the short silence before and after the sentence. The intended sentence was: "I have fifteen minutes to work on my lab report. First, I will choose the photos."
+
+Both models ran on the Raspberry Pi 5 with int8 computation and beam size 1. Timing excludes model loading and includes consuming the complete transcription result. Real-time factor is transcription time divided by the full nine-second recording.
 
 | Model | Transcript | Transcription time | Real-time factor |
 | --- | --- | --- | --- |
-| tiny.en | TODO | TODO | TODO |
-| base.en | TODO | TODO | TODO |
-
-For a setup check using the supplied 3.72-second `lookdave.wav`, tiny.en took 1.43 seconds (RTF 0.38), and base.en took 2.10 seconds (RTF 0.56). Both returned "Look Dave, I can see you're really upset about this." These are measurements on the Pi with int8 and beam size 1, excluding model loading. The table above is reserved for the required recording of our own speech.
+| tiny.en | I have 15 minutes to work on my lab report. First I'll choose the photos. | 1.271 s | 0.141 |
+| base.en | I have 15 minutes to work on my lab report. First I will choose the photos. | 2.067 s | 0.230 |
 
 **At what point does the accuracy improvement stop being worth the delay?**
 
-**TODO:** after the measurements. For One Thing, what matters is whether the task and the number of minutes come through correctly, because those change the plan the device reads back.
+For this recording, base.en took about 0.80 seconds longer without changing any information the device needs: both captured the task, fifteen minutes, and choosing photos. The only wording difference was "I'll" versus "I will." On this example, tiny.en is the better starting point for a responsive conversation. One recording does not establish that it is equally accurate for other voices, background noise, or corrections; those are cases to test before choosing a model for a finished device.
 
 **Asking for a number:** [ask_number.py](ask_number.py) asks out loud, *"How many minutes do you have for one small task?"*, records until the answer ends (Silero VAD, 0.8 s of silence), transcribes it with faster-whisper, and reads the number it heard back to the person. Each answer is saved to `results/` as audio, plus a row in `numbers.csv` with the transcript and the number extracted from it. `--question` asks something else, for example a zip code.
 
