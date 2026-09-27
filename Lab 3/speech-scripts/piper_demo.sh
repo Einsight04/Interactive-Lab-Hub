@@ -22,7 +22,7 @@ python3 -m piper \
   -- "Welcome to the world of speech synthesis."
 aplay welcome.wav
 
-# Stream straight to the speaker instead :  lower latency, because playback
+# Stream straight to the speaker instead — lower latency, because playback
 # starts before the whole sentence is synthesized. Listen for the difference.
 python3 -m piper \
   --model en_US-lessac-medium \
@@ -31,7 +31,7 @@ python3 -m piper \
   -- "This sentence is spoken first. This one is synthesized while you hear it." \
   | aplay -r 22050 -f S16_LE -t raw -
 
-# Same text, slower and quieter :  Piper exposes prosody knobs:
+# Same text, slower and quieter — Piper exposes prosody knobs:
 python3 -m piper \
   --model en_US-lessac-medium \
   --data-dir "$VOICES_DIR" \

@@ -13,7 +13,7 @@ faster-whisper, so the Pi is not transcribing silence.
 The parameter that matters most for how the interaction *feels* is
 --min-silence. It is the endpointing threshold: how long a pause has to be
 before the system concludes your turn is over. Too short and it interrupts you
-mid-sentence; too long and it feels unresponsive. There is no correct value : 
+mid-sentence; too long and it feels unresponsive. There is no correct value —
 it depends on the interaction you are designing.
 """
 

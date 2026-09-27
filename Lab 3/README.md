@@ -1,171 +1,211 @@
-# Chatterboxes: One Thing
+# Chatterboxes
 
-**Ghaith Khalil**
+**Ghaith Khalil and TODO (partner): One Thing**
 
-One Thing is a voice desk coach for the moment when several tasks feel overwhelming. It helps turn one task into a small next action that fits the time available. Instead of planning an entire day, the conversation ends with one concrete thing to start.
+One Thing is a voice desk companion for the moment when there is too much to do and nothing gets started. It asks what you want to work on, how much time you have, and what the smallest first step is. Then it stops talking so you can start. The conversation ends with one concrete thing to do, not a plan for the whole day.
 
-[Setup and in-class checklist](CLASS.md)
+## Prep
 
-The software and initial design are prepared. Pi audio checks, measured results, and participant sessions are still pending.
+The project uses a Raspberry Pi 5 with a USB microphone and a USB speaker, set up following [prep.md](prep.md). Part 2 uses the USB microphone as its sensor and the Mini PiTFT from Lab 2 for turn-taking cues. An APDS-9960 proximity sensor is optional; it was not detected on the connected Pi.
 
-## Part 1
+```
+cd ~/lab-hub/Lab\ 3
+python3 -m venv --system-site-packages .venv && source .venv/bin/activate
+pip install -r requirements.txt
+./speech-scripts/setup.sh
+```
 
-### A. Text to speech
+The Pi detects the USB PnP Sound Device microphone and UACDemoV1.0 speaker. ALSA routes capture and playback to those devices by name, so the setup does not depend on their card numbers. Hardware checks completed on the Pi: Piper synthesized and played a setup message, the microphone returned 16,000 samples without overflow, and the controller initialized the Mini PiTFT and microphone together.
 
-The greeting in [greet.sh](greet.sh) is: “Hello Ghaith. Let's find one small thing to start with today.” The script uses Piper with the `en_US-lessac-medium` voice and plays the generated WAV through the speaker. Menu option 2 compares that exact wording in espeak-ng, Festival, and Piper.
+---
 
-Piper is the initial voice choice for the prototype. The aim is a calm, conversational prompt rather than an alarm or announcement. The final choice will depend on listening to the voices on the actual speaker.
+# Part 1
 
-**Is the same greeting in different voices the same greeting?** The words stay the same, but pace, emphasis, and intonation can change whether the invitation feels patient, commanding, or mechanical. A concrete observation from the three-voice listening comparison is pending.
+## A. Text to Speech
 
-### B. Speech to text
+[greet.sh](greet.sh) greets each of us by name (`./greet.sh Ghaith`) with Piper (`en_US-lessac-medium`), streamed straight to the speaker so it starts talking before the whole sentence is synthesized:
 
-[exercises.py](exercises.py) records five seconds of speech at 16 kHz, mono, PCM 16-bit. It runs the same recording through `tiny.en` and `base.en` with CPU int8 inference and beam size 1. The transcript is fully consumed before stopping the timer. Model loading is timed separately.
+> "Hello Ghaith. Let's find one small thing to start with today."
 
-**Real-time factor = transcription time / recording duration.** A value below 1 means transcription took less time than the recording's duration. It does not include the wait for the person to finish speaking, model loading, or spoken response generation.
+`./greet.sh Ghaith compare` plays the same greeting in espeak, festival, and then Piper.
 
-| Model | Recording length | Transcription time | Real-time factor | Transcription errors |
-| --- | --- | --- | --- | --- |
-| tiny.en | Pending recording | Pending measurement | Pending measurement | Pending comparison |
-| base.en | Same recording | Pending measurement | Pending measurement | Pending comparison |
+**Is the same greeting, in these different voices, the same greeting?**
 
-The exact spoken sentence and both transcripts will be added with the measured results. The accuracy-versus-delay conclusion is pending that comparison. For this design, errors in the task or the number of minutes matter because they change the proposed plan.
+**TODO:** after listening on the speaker. One concrete way the voice changed what the greeting meant or who seemed to be speaking.
 
-**Numerical input script:** menu option 4 runs `exercises.py number`. The Pi says, “How many minutes do you have for one small task?” Pressing Enter starts a five-second recording. The script saves the WAV, recognized answer, actual words entered for comparison, and transcription timing. It records an answer without automatically treating the recognized number as correct.
+## B. Speech to Text
 
-### C. Turn-taking
+**Real-time factor for our own recording** (`arecord -d 5 -f S16_LE -c 1 -r 16000 test.wav`, then `python speech-scripts/transcribe.py test.wav --model ...`):
 
-Menu options 5, 6, and 7 run Silero VAD with silence thresholds of 0.2, 0.8, and 1.5 seconds. The comparison uses the same phrase with a thinking pause: “I want to start... my reading.” A second attempt includes a correction: “Ten... actually, fifteen minutes.”
+What was said: **TODO**
 
-| Silence threshold | What to observe | Actual observation |
-| --- | --- | --- |
-| 0.2 seconds | Whether thinking pauses or corrections split the response | Pending Pi experiment |
-| 0.8 seconds | Whether the whole answer is retained without an awkward wait | Pending Pi experiment |
-| 1.5 seconds | How the delay after finishing changes the device's apparent responsiveness | Pending Pi experiment |
+| Model | Transcript | Transcription time | Real-time factor |
+| --- | --- | --- | --- |
+| tiny.en | TODO | TODO | TODO |
+| base.en | TODO | TODO | TODO |
 
-The initial dialogue uses 0.8 seconds as a starting assumption. The experiment will determine whether it suits this task. Menu option 8 runs the complete listen, transcribe, and echo loop so the combined delay can be heard.
+For a setup check using the supplied 3.72-second `lookdave.wav`, tiny.en took 1.43 seconds (RTF 0.38), and base.en took 2.10 seconds (RTF 0.56). Both returned "Look Dave, I can see you're really upset about this." These are measurements on the Pi with int8 and beam size 1, excluding model loading. The table above is reserved for the required recording of our own speech.
 
-### D. Design and storyboard
+**At what point does the accuracy improvement stop being worth the delay?**
 
-Three possible directions were a speaking Pomodoro timer, a checklist reader, and a next-step coach. The coach gives speech a more useful role: a person can explain uncertainty, revise the task, and correct a number instead of only issuing a fixed command.
+**TODO:** after the measurements. For One Thing, what matters is whether the task and the number of minutes come through correctly, because those change the plan the device reads back.
 
-The first design follows task, available time, smallest step, and confirmation. Explicit confirmation makes corrections part of the interaction. The device stops speaking once the person is ready to begin.
+**Asking for a number:** [ask_number.py](ask_number.py) asks out loud, *"How many minutes do you have for one small task?"*, records until the answer ends (Silero VAD, 0.8 s of silence), transcribes it with faster-whisper, and reads the number it heard back to the person. Each answer is saved to `results/` as audio, plus a row in `numbers.csv` with the transcript and the number extracted from it. `--question` asks something else, for example a zip code.
 
-### Storyboard
+The script lists every number in the answer instead of guessing one, so "ten... actually, fifteen" is saved as `10 15`. That is the kind of correction the device has to handle.
 
-![Proposed six-scene interaction](images/storyboards.png)
+**TODO:** the characteristic errors seen on digit strings (for example "fifteen" vs "fifty", or a phone number).
+
+## C. Turn-taking
+
+`python speech-scripts/listen.py --min-silence <seconds>`, using two test phrases that include a thinking pause:
+
+- "I want to start... my reading."
+- "Ten... actually, fifteen minutes."
+
+| Min silence | What it felt like to talk to |
+| --- | --- |
+| 0.2 s | TODO |
+| 0.8 s | TODO |
+| 1.5 s | TODO |
+
+**At 0.2 s, what kinds of normal speech get cut off?** TODO
+
+**At 1.5 s, what does the delay make the system seem like?** TODO
+
+**`echo_bot.py`:** TODO: how the combined delay (endpointing + transcription + speech) felt.
+
+## D. Storyboard
+
+We considered three ideas: a speaking Pomodoro timer, a checklist reader, and a next-step coach. We chose the coach because it is the only one where speech does something a button can't. You can explain that you are unsure, change your mind, and correct a number mid-sentence.
+
+![Six-scene storyboard of One Thing](images/storyboards.png)
 
 | Scene | Person | Device |
 | --- | --- | --- |
-| 1. Stuck at the desk | Looks at several unfinished tasks and asks for help starting. | “What is one thing you want to get started on?” |
-| 2. Choose something | “I have to work on my lab report.” | Waits for the full response, then asks how many minutes are available. |
-| 3. Make it manageable | “About ten.” | “What is the smallest first step you could take?” |
-| 4. Confirm | “Write the first paragraph.” | “Ten minutes to draft the first paragraph. Does that sound right?” |
-| 5. Correct or begin | “Actually, I should choose the photos first.” | Revises the plan and confirms it again. |
-| 6. Start | Agrees and begins the selected task. | “Ready when you are.” Stops speaking. |
+| 1. Stuck | Sits down at a desk covered in unfinished tasks. | "What is one thing you want to get started on?" |
+| 2. Pick a task | "My lab report." | Waits for the whole answer, then asks how many minutes they have. |
+| 3. Make it small | "Ten." | "What is the smallest first step you could take?" |
+| 4. Confirm | "Write the first paragraph." | "Ten minutes to write the first paragraph. Does that sound right?" |
+| 5. Correct | "Actually, photos first." | Repeats the corrected plan and asks again. |
+| 6. Begin | Agrees and starts working. | "Ready when you are." Then stays quiet. |
 
-### Dialogue and pauses
-
-The following is an anticipated example, not a record of a participant session.
+### Dialogue, with pauses
 
 **Device:** What is one thing you want to get started on?  
-**[Wait for speech. Allow at least 0.8 seconds of silence after the answer. Allow longer if the person seems to be thinking.]**  
+*[Wait for the answer, then 0.8 s of silence. If they seem to be thinking, keep waiting.]*  
 **Person:** My lab report.  
 **Device:** How many minutes do you have?  
-**[Wait for the whole numerical response, then 0.8 seconds.]**  
+*[Wait for the whole number, then 0.8 s.]*  
 **Person:** Ten.  
 **Device:** What is the smallest first step you could take?  
-**[Wait. Do not fill a thinking pause immediately.]**  
+*[Long wait. This is the question people need to think about, so don't fill the silence.]*  
 **Person:** Write the introduction... actually, choose the photos first.  
 **Device:** Ten minutes to choose the photos. Does that sound right?  
-**[Wait for confirmation or correction.]**  
+*[Wait for yes or a correction.]*  
 **Person:** Yes.  
-**Device:** Ready when you are. You can begin, or tell me what to change.
+**Device:** Ready when you are.
 
-The initial 0.8-second threshold is a starting assumption to compare against the Part C experiments. In the wizard study, the designer uses context rather than enforcing it as a hard cutoff. After about five seconds with no answer, ask once, “Would you like more time?” Then wait. If the user says stop, end the conversation immediately.
+If there is no answer for about five seconds, the device says "Take your time" once and waits again. If the person says stop, it stops.
 
-### Alternatives
+The 0.8 s pause is a starting guess, to be checked against Part C. The pause before the "smallest step" answer is intentionally longer than the others.
 
-- Unclear number: “Was that fifteen or fifty minutes?” Confirm rather than guess.
-- Too large a step: “What could you do in just the first two minutes?”
-- No task in mind: “Would you like to start with study, chores, or something else?”
-- Correction: repeat the corrected plan and ask for confirmation.
-- Already finished: “Would you like another step, or are you done for now?”
+**Alternative branches**
+
+- Unclear number: "Was that fifteen or fifty minutes?" Confirm instead of guessing.
+- Step too big: "What could you do in just the first two minutes?"
+- No task in mind: "Would you like to start with studying, chores, or something else?"
+- Correction: repeat the corrected plan and confirm again.
+
+**Process:** The design works backwards from the ending (the person starts working) to the least the device needs to know to get there: a task, the time available, and a first step. The alternative branches come from asking what could go wrong at each turn.
 
 
-### E. Acting out the dialogue
 
-The participant will receive this introduction: “This helps you choose a small next step. Try it using something you actually need to do.” The dialogue and operator controls stay out of their view. The operator selects or types device replies after hearing the participant's full response.
+## E. Acting out the dialogue
 
-The interaction will be recorded with permission. Afterward, the participant will be asked where they felt interrupted or stuck, whether the proposed step was useful, and what they thought the device could understand.
+One of us plays the device from a script the other person has not seen. The participant is told only: "This helps you choose a small next step. Try it with something you actually need to do."
 
-**Interaction video:** pending.  
-**Difference between the imagined and actual dialogue:** pending the first partner session.  
-**Revision based on that session:** pending.
+**Partner:** TODO
 
-## Part 2
+**Video:** TODO
 
-### Prototype and additional modality
+**Did the dialogue seem different than imagined, and how?**
 
-The prepared prototype uses a Raspberry Pi 5, USB microphone, USB speaker, and optionally the existing Mini PiTFT. [wizard.py](wizard.py) is the controller. The operator listens to the person, chooses a preset or writes a custom reply, and Piper speaks it through the Pi. The voice stays loaded between turns to avoid reloading it for every reply.
+TODO
 
-The microphone can record the interaction to a local WAV. Timestamped events capture device states, spoken replies, synthesis time, and operator notes. The operator supplies the dialogue decisions; this is a Wizard of Oz prototype, not an autonomous assistant. Whisper and VAD are used in the separate speech experiments.
+---
 
-The optional display in [status_display.py](status_display.py) adds text and color:
+# Part 2
 
-| State | Screen message | Meaning |
-| --- | --- | --- |
-| Loading | GETTING READY | Voice is loading |
-| Listening | LISTENING / Your turn | The operator is waiting for the participant |
-| Thinking | THINKING / Please wait | The operator is deciding, or a reply is being synthesized |
-| Speaking | SPEAKING / My turn | The Pi is playing a reply |
-| Idle | ONE THING / Ready when you are | No active conversation |
+## Prep for Part 2
 
-“Listening” indicates the conversational turn, not the microphone recording status. If recording is enabled, it runs throughout the session, including device replies. `/think` and `/listen` let the operator explicitly change the state; speaking and synthesis states change automatically. This makes the intended turn visible without relying on color alone.
+**1. What could be improved (wording, timing, misunderstandings)?**
 
-[screen_session.sh](screen_session.sh) temporarily stops an active Lab 2 screen service and restores it when the session ends. It reuses the installed Lab 2 display environment. The screen integration is prepared but has not yet been checked on the Pi.
+TODO: from the Part E session and feedback.
 
-This is an initial implementation. A revised storyboard and dialogue must still follow the actual Part 1 findings.
+**2. Modes of interaction beyond speech: how does someone know when the device is listening and when it is thinking?**
 
-### Controller
+- **Microphone:** detects the end of a spoken turn. The wizard starts the conversation with preset `1`. Optional proximity mode (`--sensor`) starts when a hand is held close to an attached APDS-9960; it is not a room occupancy sensor.
+- **Screen (Mini PiTFT):** shows the device's state in text and colour: ONE THING / *wave to start* in optional proximity mode, LISTENING / *your turn*, THINKING / *one moment*, SPEAKING / *my turn*. The switch from LISTENING to THINKING happens automatically when voice activity detection decides the person has finished talking, so they can see that their turn registered.
 
-| Input | Action |
+**3. New storyboard / script**
+
+TODO: revised after the Part E findings.
+
+## Prototype your system
+
+[wizard.py](wizard.py) is a Wizard-of-Oz controller. The system:
+
+- runs on the Raspberry Pi 5,
+- uses the microphone and Silero VAD to detect spoken turns,
+- requires the participant to speak to it. The wizard listens and chooses the device's reply, and the Pi speaks it with Piper.
+
+```
+sudo systemctl stop window-clock.service   # free the screen from Lab 2
+python wizard.py
+```
+
+The participant speaks into the microphone. Only the wizard types commands. Use `/quit` to finish, then `sudo systemctl start window-clock.service` to restore the clock.
+
+| What happens | Who does it |
 | --- | --- |
-| 1 / 2 / 3 | Ask for a task / available minutes / smallest step |
-| 4 | Ask the person to repeat |
-| 5 | Offer a smaller step or different task |
-| 6 | Invite the person to begin |
-| 7 | Say the conversation can stop |
-| 8 | Ask whether more thinking time is needed |
-| Any other text | Speak a custom response, including a confirmation or correction |
-| `/think` / `/listen` | Change the visible conversational state |
-| `/note text` | Save an observation without speaking it |
-| `/quit` | End the session and close the recording |
+| Start the conversation | Wizard presses `1`; optional proximity mode can trigger it |
+| Screen switches to THINKING when they stop talking | Automatic (Silero VAD, 0.8 s) |
+| Choosing what the device says next | Wizard: type `1`-`8` for a preset, or type any sentence |
+| Screen shows SPEAKING, then LISTENING | Automatic |
+| End the session | Wizard types `/quit` |
 
-After speaking the stop reply, the operator ends the session with `/quit`. Microphone recording requires an affirmative answer to the permission prompt. Session files remain local in `results/` and are excluded from Git. Each session saves a label and a snapshot of the dialogue prompts used. Menu option 12 saves an observed problem and a before/after wording change, which the next controller session loads automatically. This allows the initial and revised versions to be distinguished in the evidence.
+Presets: `1` ask for a task, `2` ask for minutes, `3` ask for the smallest step, `4` ask them to repeat, `5` offer a smaller step, `6` "Ready when you are", `7` stop, `8` "Take your time". Confirmations such as "Ten minutes to choose the photos. Does that sound right?" are typed live using the person's own words. `/note ...` logs a silent observation.
 
-**System video:** pending hardware session.  
-**Controller video or screen recording:** pending hardware session.
+Each session writes a timestamped log to `results/session-*.jsonl`: each end of a spoken turn with its length, each reply, screen-state changes, and notes. Arrival and departure events are also logged when the optional proximity sensor is enabled. Raw participant audio is not saved by this controller.
 
-### User testing
+**Video of the system:** TODO
 
-| Session | Interaction and evidence | Findings and resulting change |
+**Screen recording of the controller:** TODO
+
+## Test the system
+
+| Participant | Video | Notes |
 | --- | --- | --- |
-| Participant 1, revised prototype | Pending | Pending |
-| Participant 2, revised prototype | Pending | Pending |
+| TODO | TODO | TODO |
+| TODO | TODO | TODO |
 
-**What worked well about the system and what didn't?** Pending actual interactions. The study will check whether the next step feels manageable and whether confirmation handles corrections clearly.
+### What worked well about the system and what didn't?
 
-**What worked well about the controller and what didn't?** Pending operator use during the study. The main questions are whether preset replies are sufficient and whether typing a custom confirmation creates noticeable silence.
+TODO
 
-**What lessons can you take away from the WoZ interactions for designing a more autonomous version?** Pending the observed interactions. The recordings and event logs will help identify useful clarification questions, corrections, and tolerable response delays before selecting an autonomous dialogue policy.
+### What worked well about the controller and what didn't?
 
-**How could this create a dataset of interaction? What other sensing modalities make sense?** Each session can pair microphone audio with elapsed timestamps for device replies and state transitions. After the study, turns could be annotated as task choice, duration, clarification, correction, confirmation, or stop. The microphone also captures the speaker, so device turns must be distinguished using the event log and audio. A synchronized video could add visible hesitation and attention to the display. A physical confirmation button could provide an explicit event when speech is ambiguous. Only recordings participants agree to share should be published.
+TODO
 
-### Evidence collection
+### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
 
-Menu option 11 saves experiment observations, and option 13 saves the actual findings from each participant session. [evidence.py](evidence.py) combines those notes, revision records, and measured recognition results into a local `results/report-evidence.md` worksheet through option 14. Missing results remain pending. [collect.sh](collect.sh) backs up the Pi results to the laptop without deleting the originals. These tools collect evidence; they do not replace the final interpretation or the interaction videos.
+TODO
 
-## Contributions and influences
+### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
 
-AI helped me with planning and code. The [IRL-CT Lab 3 starter](https://github.com/IRL-CT/Interactive-Lab-Hub/tree/Fall2026-shadow/Lab%203) provided the speech exercises and setup. The display uses the Mini PiTFT setup from Lab 2. One Thing extends the focus-on-work theme into choosing how to begin.
+The controller logs each device reply, the end and duration of each detected spoken turn, and operator notes. With participant consent, a synchronized microphone recording and transcript could add the actual words, corrections, and intended task. Those annotations would support training and evaluating a dialogue policy. The logged screen-state timestamps help measure whether the visible cue matched the spoken turn. A camera could capture gestures and attention, but it would require separate consent and would collect more personal information than audio alone. The current logs do not contain enough information to reconstruct what a participant said.
+
+---
+
+**Contributions:** AI assistance with planning and code. Speech scripts and setup from the [IRL-CT Lab 3 starter](https://github.com/IRL-CT/Interactive-Lab-Hub/tree/Fall2026/Lab%203). The screen driver is reused from Lab 2.

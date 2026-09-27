@@ -17,11 +17,10 @@ VOICES_DIR="$LAB_DIR/voices"
 
 if [[ -z "${VIRTUAL_ENV:-}" ]]; then
   echo "WARNING: no virtualenv active. Run 'source .venv/bin/activate' first."
-  echo "Continuing in 5s :  Ctrl-C to abort."
+  echo "Continuing in 5s - Ctrl-C to abort."
   sleep 5
 fi
 
-if [[ "${SKIP_SYSTEM_PACKAGES:-0}" != "1" ]]; then
 echo "==> Installing system audio and classic TTS packages"
 sudo apt-get update
 sudo apt-get install -y \
@@ -30,12 +29,11 @@ sudo apt-get install -y \
   espeak-ng \
   festival festvox-kallpc16k \
   flite
-fi
 
 # Notes on what we deliberately no longer install:
-#   libttspico-utils :  abandoned Android TTS code, not in current Debian
-#   mplayer          :  was only there for the Google translate_tts hack
-#   portaudio19-dev  :  only needed to *build* pyaudio; we use sounddevice
+#   libttspico-utils - abandoned Android TTS code, not in current Debian
+#   mplayer          - was only there for the Google translate_tts hack
+#   portaudio19-dev  - only needed to *build* pyaudio; we use sounddevice
 
 echo "==> Fetching Silero VAD model"
 mkdir -p "$MODELS_DIR"
