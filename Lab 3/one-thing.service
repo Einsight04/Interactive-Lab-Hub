@@ -1,0 +1,15 @@
+[Unit]
+Description=One Thing speech prototype and wizard controller
+After=sound.target network.target
+Conflicts=window-clock.service piscreen.service
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/lab-hub/Lab 3
+ExecStart="/home/pi/lab-hub/Lab 3/.venv/bin/python" -u wizard.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

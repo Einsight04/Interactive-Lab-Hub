@@ -31,7 +31,9 @@ The Pi detects the USB PnP Sound Device microphone and UACDemoV1.0 speaker. ALSA
 
 **Is the same greeting, in these different voices, the same greeting?**
 
-**TODO:** after listening on the speaker. One concrete way the voice changed what the greeting meant or who seemed to be speaking.
+The literal request stays the same, but the delivery changes the role suggested by the device. A strongly synthetic voice frames "one small thing" as a system instruction, while a more conversational voice supports the intended role of a calm desk companion. That is why Piper is the design choice here. This is a design interpretation rather than a participant preference result.
+
+The same greeting was generated and played through the Pi speaker with all three engines. Comparison samples: [espeak](audio/greeting-espeak.wav), [Festival](audio/greeting-festival.wav), and [Piper](audio/greeting-piper.wav). A live listener rating was not collected.
 
 ## B. Speech to Text
 
@@ -56,26 +58,31 @@ For this recording, base.en took about 0.80 seconds longer without changing any 
 
 The script lists every number in the answer instead of guessing one, so "ten... actually, fifteen" is saved as `10 15`. That is the kind of correction the device has to handle.
 
-**TODO:** the characteristic errors seen on digit strings (for example "fifteen" vs "fifty", or a phone number).
+The fixed recording preserved "fifteen" as `15` in both models. In the live demo, however, the answer "Fifteen minutes" was reduced to "in minutes," losing the numerical information entirely. In a separate speaker-to-microphone replay, "fifteen" was transcribed as `50`. These examples show both omission and substitution errors. The original audio and a spoken readback are needed to distinguish those errors from the intended number. The solo demo used agreed plan values; it did not recover the missing number autonomously.
 
 ## C. Turn-taking
 
-`python speech-scripts/listen.py --min-silence <seconds>`, using two test phrases that include a thinking pause:
+To hold the speech constant, the same nine-second microphone recording from Part B was replayed into Silero VAD at three silence thresholds on the Pi. Audio was supplied in 512-sample blocks at 16 kHz, with two seconds of trailing silence added so the last turn could finish. These are controlled replay measurements, not three live conversational trials or participant ratings. [Measurement data](media/turntaking-measurements.json).
 
-- "I want to start... my reading."
-- "Ten... actually, fifteen minutes."
+| Minimum silence | Detected turns | End-of-turn decision, from recording start | Transcription time after detection |
+| --- | --- | --- | --- |
+| 0.2 s | 1 | 5.280 s | 1.015 s |
+| 0.8 s | 1 | 5.856 s | 1.059 s |
+| 1.5 s | 1 | 6.560 s | 1.001 s |
 
-| Min silence | What it felt like to talk to |
-| --- | --- |
-| 0.2 s | TODO |
-| 0.8 s | TODO |
-| 1.5 s | TODO |
+All three produced "I have 15 minutes to work on my lab report. First I will choose the photos." This recording did not contain a pause that caused the short threshold to split it. Moving from 0.2 to 1.5 seconds delayed the end-of-turn decision by 1.28 seconds without improving the transcript in this sample.
 
-**At 0.2 s, what kinds of normal speech get cut off?** TODO
+**At 0.2 s, what kinds of normal speech get cut off?**
 
-**At 1.5 s, what does the delay make the system seem like?** TODO
+A breath, hesitation, or pause before a correction can exceed 0.2 seconds. The design risk is committing to "ten" before hearing "actually, fifteen." That risk was not observed in the continuous sentence above and should not be inferred as a measured cutoff from this test. The controller therefore lets the wizard reopen listening and repair the plan.
 
-**`echo_bot.py`:** TODO: how the combined delay (endpointing + transcription + speech) felt.
+**At 1.5 s, what does the delay make the system seem like?**
+
+The extra wait gives someone more room to think, but leaves a noticeable interval before an answer can begin. Without a visible listening cue, that interval could be mistaken for a missed utterance. This is the design interpretation of the measured delay; a live subjective comparison is still uncollected. The prototype starts at 0.8 seconds and shows when it is listening versus waiting for a reply.
+
+**The combined loop**
+
+Using the 0.8-second replay, recognition took 1.059 seconds. Piper took another 0.557 seconds to produce the first audio chunk for the echo response. Adding the nominal 0.8-second endpoint threshold gives about 2.42 seconds before a response could start, excluding audio-device buffering and scheduling. This is a component-based estimate, not a measured live `echo_bot.py` conversation. In the actual prototype rehearsal, operation through chat added enough delay that the solo recording was repeated with a predetermined operator sequence. Faster turn selection helped, but did not make recognition autonomous.
 
 ## D. Storyboard
 
@@ -200,9 +207,9 @@ On the Pi:
 
 ```sh
 cd ~/lab-hub/Lab\ 3
-source .venv/bin/activate
-sudo systemctl stop window-clock.service
-python wizard.py
+sudo cp one-thing.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl start one-thing
 ```
 
 On the laptop, in a separate terminal:
@@ -213,7 +220,7 @@ ssh -N -L 5050:127.0.0.1:5000 pi
 
 Open `http://localhost:5050`. The web server listens only on the Pi's loopback interface; the SSH tunnel connects the controller to it. The participant speaks to the Pi, while the wizard uses the laptop. Keyboard shortcuts 1 through 4 select the main prompts when a text field is not focused; Escape stops playback.
 
-Each session writes `results/session-*.jsonl` with state changes, transcript text and timing, spoken replies, plan edits, button events, and notes. Raw microphone audio is not retained by this controller. The phone recording supplies the physical interaction evidence. After exiting the prototype, `sudo systemctl start window-clock.service` restores Lab 2.
+Each session writes `results/session-*.jsonl` with state changes, transcript text and timing, spoken replies, plan edits, button events, and notes. Raw microphone audio is not retained by this controller. The phone recording supplies the physical interaction evidence. The supplied service uses the Pi's `pi` account and `/home/pi/lab-hub/Lab 3` installation. `sudo systemctl stop one-thing` releases the microphone and screen; `sudo systemctl start window-clock.service` restores Lab 2. The Lab 3 service is installed but is not enabled at boot.
 
 **Video of the system:** [Watch the 47-second demonstration](media/one-thing-demo.mp4).
 
@@ -221,7 +228,9 @@ Each session writes `results/session-*.jsonl` with state changes, transcript tex
 
 The recording shows the spoken task, time, and first step; the bottom-button correction; and the top-button confirmation of the revised plan. It is a scripted solo demonstration. To avoid delays from operating through chat, a predetermined operator sequence advanced after each recognized turn and submitted the agreed plan values. This was not autonomous interpretation of the conversation. [Timestamped events from this take](media/demo-events.jsonl) document the state transitions and button presses.
 
-**Screen recording of the controller:** TODO.
+**Controller screencapture:** the live browser interface during a separate documentation walkthrough.
+
+![Live One Thing controller with plan fields and Pi preview](images/controller.png)
 
 ## Test the system
 
@@ -235,13 +244,13 @@ Testing with two other people has not been completed. The demonstration is a sol
 
 The solo demonstration completed the full correction path: the first plan was to choose photos, the bottom button requested a change, and the top button confirmed the revised introduction step. The task card made the proposed action visible before committing. Both physical button events are present in the log.
 
-Recognition was less reliable than the earlier fixed-recording comparison. During this take, the live transcript rendered "My lab report" as "of my library for it" and lost the number in "Fifteen minutes." The known demonstration script let the operator continue, but a general conversation would need a clarification instead. The microphone settling period also continues briefly after LISTENING appears, which can miss the beginning of an immediate answer. That timing should be aligned before relying on the screen cue in an autonomous version.
+Recognition was less reliable than the earlier fixed-recording comparison. During this take, the live transcript rendered "My lab report" as "of my library for it" and lost the number in "Fifteen minutes." The known demonstration script let the operator continue, but a general conversation would need a clarification instead. The recording also exposed a timing issue: LISTENING appeared before the short microphone settling period had finished, which could miss an immediate answer. After the recording, the code was changed to keep the speaking cue visible through that period and show LISTENING only when input is accepted. The video documents the version before this fix.
 
 ### What worked well about the controller and what didn't?
 
 Preset replies, editable plan fields, and visible transcripts separate the wizard's decisions from the device's output. Stop cancels playback and invalidates pending replies, and the event log makes the conversation timing inspectable.
 
-Operating every turn through chat was too slow in the first rehearsal. For the recorded take, the agreed sequence advanced as soon as each transcript arrived. This reduced operator delay but only demonstrates that specific script. It does not establish how quickly a wizard could handle an unexpected answer through the browser. A recording of the browser controller is still needed to show that interface directly.
+Operating every turn through chat was too slow in the first rehearsal. For the recorded take, the agreed sequence advanced as soon as each transcript arrived. This reduced operator delay but only demonstrates that specific script. It does not establish how quickly a wizard could handle an unexpected answer through the browser. The controller screencapture above documents that interface separately from the physical demonstration.
 
 ### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
 

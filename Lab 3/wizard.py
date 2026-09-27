@@ -133,7 +133,7 @@ class Engine:
         with self.audio_lock, self.lock:
             self.epoch += 1
             sd.stop()
-            self.muted_until = time.monotonic() + 0.4
+            self.muted_until = time.monotonic()
             self.data["error"] = ""
             self.state(state)
             self.data["level"] = 0
@@ -241,9 +241,13 @@ class Engine:
                         sd.play(audio, self.output_rate, device=self.output_device)
                         self.state("speaking")
                     sd.wait()
+                # Keep the speaking cue visible while the speaker tail settles.
+                # LISTENING must only appear once microphone input is accepted.
+                if after == "listening":
+                    self.done.wait(0.45)
                 with self.lock:
-                    if epoch == self.epoch:
-                        self.muted_until = time.monotonic() + 0.45
+                    if epoch == self.epoch and not self.done.is_set():
+                        self.muted_until = time.monotonic()
                         self.state(after)
             except Exception as exc:
                 with self.lock:

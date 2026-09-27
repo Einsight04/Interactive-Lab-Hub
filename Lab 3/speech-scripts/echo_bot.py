@@ -43,6 +43,21 @@ class Speaker:
 
     def __init__(self, voice_path: Path) -> None:
         self.voice = PiperVoice.load(str(voice_path))
+        self.output_device = next(
+            (
+                i
+                for i, d in enumerate(sd.query_devices())
+                if "UACDemo" in d["name"] and d["max_output_channels"] > 0
+            ),
+            sd.default.device[1],
+        )
+        self.output_rate = 48000
+        sd.check_output_settings(
+            device=self.output_device,
+            channels=1,
+            dtype="int16",
+            samplerate=self.output_rate,
+        )
 
     def say(self, text: str) -> float:
         """Speaks the text. Returns seconds until the first audio was ready."""
@@ -52,20 +67,35 @@ class Speaker:
             audio = np.frombuffer(chunk.audio_int16_bytes, dtype=np.int16)
             if first_audio_at is None:
                 first_audio_at = time.perf_counter() - t0
-            sd.play(audio, samplerate=chunk.sample_rate)
+            if chunk.sample_rate != self.output_rate:
+                positions = (
+                    np.arange(round(len(audio) * self.output_rate / chunk.sample_rate))
+                    * chunk.sample_rate
+                    / self.output_rate
+                )
+                audio = np.interp(positions, np.arange(len(audio)), audio).astype(
+                    np.int16
+                )
+            sd.play(audio, samplerate=self.output_rate, device=self.output_device)
             sd.wait()
         return first_audio_at or 0.0
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--model", default="tiny.en",
-                        help="whisper model size (default: tiny.en)")
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--model", default="tiny.en", help="whisper model size (default: tiny.en)"
+    )
     parser.add_argument("--vad-model", type=Path, default=DEFAULT_VAD)
     parser.add_argument("--voice", type=Path, default=DEFAULT_VOICE)
-    parser.add_argument("--min-silence", type=float, default=0.4,
-                        help="seconds of silence that end your turn (default: 0.4)")
+    parser.add_argument(
+        "--min-silence",
+        type=float,
+        default=0.4,
+        help="seconds of silence that end your turn (default: 0.4)",
+    )
     args = parser.parse_args()
 
     for path, what in [(args.vad_model, "VAD model"), (args.voice, "Piper voice")]:
@@ -94,7 +124,7 @@ def main() -> None:
             chunk, _ = stream.read(samples_per_read)
             buffer = np.concatenate([buffer, chunk.reshape(-1)])
 
-            while len(buffer) > window:
+            while len(buffer) >= window:
                 vad.accept_waveform(buffer[:window])
                 buffer = buffer[window:]
 
@@ -114,9 +144,11 @@ def main() -> None:
                 print(f"  reply: {reply}")
                 tts_latency = speaker.say(reply)
 
-                print(f"  [asr {asr_done - turn_ended:.2f}s | "
-                      f"tts first audio {tts_latency:.2f}s | "
-                      f"total gap {asr_done - turn_ended + tts_latency:.2f}s]\n")
+                print(
+                    f"  [asr {asr_done - turn_ended:.2f}s | "
+                    f"tts first audio {tts_latency:.2f}s | "
+                    f"total gap {asr_done - turn_ended + tts_latency:.2f}s]\n"
+                )
                 return  # one turn only: listen, reply once, then exit
 
 

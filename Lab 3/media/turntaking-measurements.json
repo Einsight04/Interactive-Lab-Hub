@@ -1,0 +1,43 @@
+{
+  "method": "Same recorded human speech replayed into VAD in 512-sample blocks; two seconds of trailing silence added. No live participant ratings.",
+  "results": [
+    {
+      "min_silence": 0.2,
+      "turns": [
+        {
+          "start_seconds": 0.678,
+          "detected_at_seconds": 5.28,
+          "speech_seconds": 4.402,
+          "transcript": "I have 15 minutes to work on my lab report. First I will choose the photos.",
+          "asr_seconds": 1.015
+        }
+      ]
+    },
+    {
+      "min_silence": 0.8,
+      "turns": [
+        {
+          "start_seconds": 0.678,
+          "detected_at_seconds": 5.856,
+          "speech_seconds": 4.378,
+          "transcript": "I have 15 minutes to work on my lab report. First I will choose the photos.",
+          "asr_seconds": 1.059
+        }
+      ]
+    },
+    {
+      "min_silence": 1.5,
+      "turns": [
+        {
+          "start_seconds": 0.678,
+          "detected_at_seconds": 6.56,
+          "speech_seconds": 4.382,
+          "transcript": "I have 15 minutes to work on my lab report. First I will choose the photos.",
+          "asr_seconds": 1.001
+        }
+      ]
+    }
+  ],
+  "echo_first_audio_seconds": 0.557,
+  "echo_reply": "You said: I have 15 minutes to work on my lab report. First I will choose the photos."
+}
