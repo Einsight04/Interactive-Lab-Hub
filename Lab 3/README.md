@@ -1,6 +1,6 @@
 # Chatterboxes
 
-**Collaborators:** Ghaith Khalil and Aryan
+**Collaborators:** Ghaith Khalil and Aryan Palave
 
 **Project:** One Thing
 
