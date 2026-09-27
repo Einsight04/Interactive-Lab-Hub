@@ -41,7 +41,7 @@
   "echo_first_audio_seconds": 0.557,
   "echo_reply": "You said: I have 15 minutes to work on my lab report. First I will choose the photos.",
   "live_trials": {
-    "method": "Separate live microphone attempts, requested sentence: I have ten... actually, fifteen minutes to work on my report. Pauses were not measured. Subjective impressions not yet collected.",
+    "method": "Separate live microphone attempts, requested sentence: I have ten... actually, fifteen minutes to work on my report. Pauses were not measured. Subjective impressions confirmed by the participant after the trials and documented in the report.",
     "results": [
       {
         "min_silence": 0.2,

@@ -65,7 +65,9 @@ We then tried all three settings live, saying “I have ten... actually, fifteen
 
 All three split our correction into two turns. At 0.2 seconds, the first part was also misrecognized. The longer settings kept the words more accurately in these attempts, but still separated the original number from its correction. We did not measure the pauses between our words, so this does not show that the settings behave identically. Unlike the earlier replay, these were separate spoken attempts.
 
-A pause before changing a number can therefore leave the device with an incomplete answer. Our wizard needs to keep listening for a correction and read the final plan back. We still need to add our impressions of how the three settings felt; the transcripts alone cannot tell us that.
+**How the settings felt:** At 0.2 seconds, the device felt too quick to decide we were finished. The pause before “actually” broke the correction into a separate turn. At 0.8 seconds, there was more room to pause, but our correction still got split. At 1.5 seconds, the wait felt slow, as though the device was taking too long to register the answer. Waiting longer also did not keep this attempt together.
+
+We kept 0.8 seconds as a starting point. A pause before changing a number can still leave the device with an incomplete answer, so timing alone is not enough. Our wizard needs to keep listening for a correction and read the final plan back.
 
 ### The complete loop
 
