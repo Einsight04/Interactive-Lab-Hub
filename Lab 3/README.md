@@ -6,7 +6,7 @@ One Thing is a voice desk companion for the moment when there is too much to do 
 
 ## Prep
 
-The project uses a Raspberry Pi 5 with a USB microphone and a USB speaker, set up following [prep.md](prep.md). Part 2 uses the USB microphone as its sensor and the Mini PiTFT from Lab 2 for turn-taking cues. An APDS-9960 proximity sensor is optional; it was not detected on the connected Pi.
+The project uses a Raspberry Pi 5 with a USB microphone and a USB speaker, set up following [prep.md](prep.md). Part 2 uses the USB microphone as its sensor and the Mini PiTFT from Lab 2 for turn-taking cues. The built-in screen buttons provide confirmation, correction, and stop controls.
 
 ```
 cd ~/lab-hub/Lab\ 3
@@ -143,54 +143,87 @@ TODO
 
 **1. What could be improved (wording, timing, misunderstandings)?**
 
-TODO: from the Part E session and feedback.
+The implementation needed visible acknowledgement of a finished turn, an explicit readback before committing to a plan, a way to correct that plan, and a stop control that also cancels pending work. These changes are implemented below. The Part E reflection still needs to be added from the recorded session.
 
 **2. Modes of interaction beyond speech: how does someone know when the device is listening and when it is thinking?**
 
-- **Microphone:** detects the end of a spoken turn. The wizard starts the conversation with preset `1`. Optional proximity mode (`--sensor`) starts when a hand is held close to an attached APDS-9960; it is not a room occupancy sensor.
-- **Screen (Mini PiTFT):** shows the device's state in text and colour: ONE THING / *wave to start* in optional proximity mode, LISTENING / *your turn*, THINKING / *one moment*, SPEAKING / *my turn*. The switch from LISTENING to THINKING happens automatically when voice activity detection decides the person has finished talking, so they can see that their turn registered.
+The Mini PiTFT shows an animated face alongside explicit state labels. Listening uses mint green and microphone-responsive bars; thinking uses amber moving dots; speaking uses blue animated bars. Text keeps the states understandable without relying on colour. The face gives the device a consistent presence, while the listening meter indicates that sound is reaching the microphone.
 
-**3. New storyboard / script**
+![Rendered previews of the six Pi interface states](images/interface-states.png)
 
-TODO: revised after the Part E findings.
+*Interface renders from the same drawing code used on the Pi, not photographs of a user session.*
+
+A separate confirmation screen shows the first step, the number of minutes, and the task. The top button confirms it, and the bottom button asks to change it. Outside confirmation, the top button opens a listening turn and the bottom button stops speech. A confirmed plan remains on screen so the user has something concrete to start with.
+
+**3. Revised script**
+
+This revision addresses implementation issues identified while building the prototype. It has not been validated with two other participants.
+
+| Moment | Device and screen | Person |
+| --- | --- | --- |
+| Start | Wizard selects the task prompt. Blue SPEAKING becomes green LISTENING. | Says what they want to work on. |
+| End of turn | After 0.8 seconds of silence, the display changes to amber THINKING. The controller receives an automatic transcript. | Sees that their turn registered. |
+| Time | Wizard asks how many minutes are available. | Gives a number, possibly with a correction. |
+| Clarify | Wizard asks about an ambiguous number instead of committing to the transcript. | Clarifies the intended time. |
+| First step | Wizard asks for the smallest first step, or offers a smaller step if needed. | Chooses something concrete. |
+| Readback | Device speaks the plan and displays a task card. | Top button confirms; bottom button requests a correction. |
+| Correct | Device asks what should change. Wizard updates the plan and reads it back again. | Gives the correction aloud. |
+| Finish | Device says "Ready when you are. One small step is enough." The plan stays visible. | Begins the task. |
+
+The transcript is a suggestion for the wizard, not a command. A thinking pause can be handled with "Take your time" and a fresh listening turn. The silence threshold can be changed live between 0.2, 0.8, and 1.5 seconds for Part C. The microphone ignores the device's speech and a short settling period afterward to reduce self-transcription. The bottom button can interrupt playback; it also invalidates replies and transcripts already in progress.
 
 ## Prototype your system
 
-[wizard.py](wizard.py) is a Wizard-of-Oz controller. The system:
+[wizard.py](wizard.py) runs speech synthesis, microphone endpointing, transcription, button input, and the local web controller on the Raspberry Pi. [device_ui.py](device_ui.py) renders the Pi display and its browser preview. [controller.html](controller.html) is the wizard interface.
 
-- runs on the Raspberry Pi 5,
-- uses the microphone and Silero VAD to detect spoken turns,
-- requires the participant to speak to it. The wizard listens and chooses the device's reply, and the Pi speaks it with Piper.
+The controller provides preset questions, custom spoken replies, the latest transcript, plan fields, silent notes, and a timestamped event history. Speech is resampled to the USB speaker's supported 48 kHz output rate so playback works while microphone capture remains active. The wizard listens, checks the transcript, and chooses the next reply. No language model chooses the dialogue. Piper produces the voice, Silero detects completed turns, and faster-whisper tiny.en supplies transcripts locally.
 
-```
-sudo systemctl stop window-clock.service   # free the screen from Lab 2
+| Behaviour | Control |
+| --- | --- |
+| Select the question or repair a misunderstanding | Wizard |
+| Recognize speech and detect the end of a turn | Automatic |
+| Animate the screen and show microphone activity | Automatic |
+| Enter the task, time, and first step | Wizard |
+| Speak and display the proposed plan | Automatic after the wizard submits it |
+| Confirm or request a change | Participant buttons, or the wizard on their behalf |
+| Stop playback and cancel pending work | Participant bottom button or controller Stop |
+
+Hardware verification completed on the Pi: microphone endpointing and transcription, interruption during active speech, spoken plan readback reaching the confirmation state, confirmation reaching the ready state, and browser Listen/Stop controls. Invalid plans and out-of-order confirmations are rejected. Physical button presses still need checking during the demonstration. Replaying a quiet recording through the speaker produced recognition errors, so automatic transcripts remain suggestions for the wizard.
+
+### Running the prototype
+
+Stop the prototype service before running the standalone Part A-C exercises so only one program uses the microphone: `sudo systemctl stop one-thing.service`.
+
+On the Pi:
+
+```sh
+cd ~/lab-hub/Lab\ 3
+source .venv/bin/activate
+sudo systemctl stop window-clock.service
 python wizard.py
 ```
 
-The participant speaks into the microphone. Only the wizard types commands. Use `/quit` to finish, then `sudo systemctl start window-clock.service` to restore the clock.
+On the laptop, in a separate terminal:
 
-| What happens | Who does it |
-| --- | --- |
-| Start the conversation | Wizard presses `1`; optional proximity mode can trigger it |
-| Screen switches to THINKING when they stop talking | Automatic (Silero VAD, 0.8 s) |
-| Choosing what the device says next | Wizard: type `1`-`8` for a preset, or type any sentence |
-| Screen shows SPEAKING, then LISTENING | Automatic |
-| End the session | Wizard types `/quit` |
+```sh
+ssh -N -L 5050:127.0.0.1:5000 pi
+```
 
-Presets: `1` ask for a task, `2` ask for minutes, `3` ask for the smallest step, `4` ask them to repeat, `5` offer a smaller step, `6` "Ready when you are", `7` stop, `8` "Take your time". Confirmations such as "Ten minutes to choose the photos. Does that sound right?" are typed live using the person's own words. `/note ...` logs a silent observation.
+Open `http://localhost:5050`. The web server listens only on the Pi's loopback interface; the SSH tunnel connects the controller to it. The participant speaks to the Pi, while the wizard uses the laptop. Keyboard shortcuts 1 through 4 select the main prompts when a text field is not focused; Escape stops playback.
 
-Each session writes a timestamped log to `results/session-*.jsonl`: each end of a spoken turn with its length, each reply, screen-state changes, and notes. Arrival and departure events are also logged when the optional proximity sensor is enabled. Raw participant audio is not saved by this controller.
+Each session writes `results/session-*.jsonl` with state changes, transcript text and timing, spoken replies, plan edits, button events, and notes. Raw microphone audio is not retained by this controller. The phone recording supplies the physical interaction evidence. After exiting the prototype, `sudo systemctl start window-clock.service` restores Lab 2.
 
-**Video of the system:** TODO
+**Video of the system:** TODO: solo demonstration.
 
-**Screen recording of the controller:** TODO
+**Screen recording of the controller:** TODO.
 
 ## Test the system
 
+Testing with two other people has not been completed. The demonstration is a solo walkthrough.
+
 | Participant | Video | Notes |
 | --- | --- | --- |
-| TODO | TODO | TODO |
-| TODO | TODO | TODO |
+| Solo demonstration | Pending recording | Demonstrates the interaction; not an independent user study. |
 
 ### What worked well about the system and what didn't?
 
@@ -206,7 +239,7 @@ TODO
 
 ### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
 
-The controller logs each device reply, the end and duration of each detected spoken turn, and operator notes. With participant consent, a synchronized microphone recording and transcript could add the actual words, corrections, and intended task. Those annotations would support training and evaluating a dialogue policy. The logged screen-state timestamps help measure whether the visible cue matched the spoken turn. A camera could capture gestures and attention, but it would require separate consent and would collect more personal information than audio alone. The current logs do not contain enough information to reconstruct what a participant said.
+The controller logs each device reply, automatic transcript, the end and duration of each detected spoken turn, plan edits, button events, and operator notes. With participant consent, a synchronized microphone recording and corrected transcript could establish the actual words and corrections, paired with the wizard's task and first-step annotations. Those annotations would support training and evaluating a dialogue policy. The logged screen-state timestamps help measure whether the visible cue matched the spoken turn. A camera could capture gestures and attention, but it would require separate consent and would collect more personal information than audio alone. The current logs contain automatic transcripts, which may be wrong; without the original audio, transcription errors cannot be checked afterward.
 
 ---
 
