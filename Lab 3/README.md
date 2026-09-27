@@ -18,9 +18,9 @@ We followed [prep.md](prep.md) and checked the microphone, speaker, and screen t
 
 We wrote [greet.sh](greet.sh) to greet us by name. It takes a name as its first argument. Adding `compare` as the second argument plays the same greeting with espeak, Festival, and Piper.
 
-We chose Piper for One Thing. The words can stay the same while the voice changes what kind of device seems to be speaking. A strongly synthetic voice makes the greeting feel more like a system instruction. A conversational voice fits the calm desk companion we are trying to make. This is our design reasoning, rather than a result from listener ratings.
+We listened to the same greeting in espeak, Festival, and Piper, in that order. The first two sounded robotic to us. Piper sounded better, so we chose it for One Thing. The words were the same, but the first two voices made it sound more like a machine giving a prompt.
 
-We generated and played all three versions on the Pi. The samples are here: [espeak](audio/greeting-espeak.wav), [Festival](audio/greeting-festival.wav), and [Piper](audio/greeting-piper.wav). We did not collect a live listening comparison.
+The samples are here: [espeak](audio/greeting-espeak.wav), [Festival](audio/greeting-festival.wav), and [Piper](audio/greeting-piper.wav).
 
 ## B. Speech to Text
 
@@ -55,9 +55,17 @@ We replayed our Part B recording into Silero VAD at three silence settings. This
 
 All three kept the whole sentence and produced the same transcript. Going from 0.2 to 1.5 seconds added 1.28 seconds before the device decided we were done. It did not improve the transcript in this example.
 
-**What can 0.2 seconds cut off?** We would worry about a breath or a pause before changing an answer: “ten... actually, fifteen.” Our recording did not trigger that problem, so we cannot claim we saw it happen in this comparison. We kept a way to reopen listening and correct the plan.
+We then tried all three settings live, saying “I have ten... actually, fifteen minutes to work on my report,” with a pause after “ten.”
 
-**What does 1.5 seconds change?** It gives us more room to think, but also leaves more silence before the device answers. Without a listening indicator, that gap could look like the device missed the answer. We chose 0.8 seconds as our starting point and made the listening state visible. We did not collect live ratings of how each setting felt.
+| Silence setting | First detected turn | Second detected turn |
+| --- | --- | --- |
+| 0.2 s | hand actually. | Actually 15 minutes to work on my report. |
+| 0.8 s | I have 10. | actually 15 minutes to work on my report. |
+| 1.5 s | I have 10. | actually 15 minutes to work on my report. |
+
+All three split our correction into two turns. At 0.2 seconds, the first part was also misrecognized. The longer settings kept the words more accurately in these attempts, but still separated the original number from its correction. We did not measure the pauses between our words, so this does not show that the settings behave identically. Unlike the earlier replay, these were separate spoken attempts.
+
+A pause before changing a number can therefore leave the device with an incomplete answer. Our wizard needs to keep listening for a correction and read the final plan back. We still need to add our impressions of how the three settings felt; the transcripts alone cannot tell us that.
 
 ### The complete loop
 
