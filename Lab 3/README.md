@@ -106,7 +106,7 @@ These are options for the wizard to choose, not automatic decisions made by the 
 
 ## E. Acting out the dialogue
 
-We acted it out together. One of us asked the device's questions, and the other answered with a real task: getting started on a startup.
+We acted it out together without sharing the script with the partner beforehand. One of us asked the device's questions, and the other answered with a real task: getting started on a startup.
 
 [![Our acted-out dialogue](images/acted-dialogue-poster.jpg)](media/acted-dialogue.mp4)
 
