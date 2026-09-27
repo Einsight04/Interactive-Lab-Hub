@@ -12,7 +12,7 @@ One Thing is a small desk companion for when there is too much to do and nothing
 
 We used a Raspberry Pi 5, a USB microphone, a USB speaker, and the Mini PiTFT from Lab 2. The microphone is our sensor. The screen shows whose turn it is, and its two buttons let us confirm a plan, change it, or stop the device.
 
-We followed [prep.md](prep.md) and checked the microphone, speaker, and screen together. The Pi detected both USB audio devices, played a spoken greeting, and captured microphone audio without overflow.
+We checked the microphone, speaker, and screen together. The Pi detected both USB audio devices, played a spoken greeting, and captured microphone audio without overflow.
 
 ## A. Text to Speech
 
