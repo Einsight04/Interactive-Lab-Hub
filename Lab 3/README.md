@@ -211,7 +211,7 @@ Our service file uses the `pi` account and `/home/pi/lab-hub/Lab 3`. Stop it wit
 
 ## Test the system
 
-We recorded a walkthrough with one of us. We did not test the prototype with two people outside our group.
+We recorded a walkthrough with one of us and also had two friends try the prototype. Both thought it was really cool. Their feedback was positive, but we did not collect detailed comments from each person or identify a specific change from their feedback. The observations below come from our recorded walkthrough.
 
 ### What worked well about the system and what didn't?
 
@@ -231,7 +231,7 @@ The first rehearsal was too slow because each turn was being triggered through c
 
 Hearing that a turn ended is different from understanding it. We would keep task, time, and first step as separate fields and confirm them before moving on. Missing numbers should cause another question. A correction should update the relevant field and trigger another readback. We would keep the buttons as a simple way to accept or change a plan when speech recognition gets something wrong.
 
-These lessons come from our own walkthrough, not an independent user study.
+These lessons come from our own walkthrough. Our friends’ positive reactions did not give us enough detail to draw further conclusions about usability.
 
 ### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
 
