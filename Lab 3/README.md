@@ -211,7 +211,9 @@ Our service file uses the `pi` account and `/home/pi/lab-hub/Lab 3`. Stop it wit
 
 ## Test the system
 
-We recorded a walkthrough with one of us and also had two friends try the prototype. Both thought it was really cool. Their feedback was positive, but we did not collect detailed comments from each person or identify a specific change from their feedback. The observations below come from our recorded walkthrough.
+We recorded a walkthrough with one of us and also had two friends try the prototype. Both thought it was really cool. Their feedback was positive, and we got the following changes: 
+- Screen states: A friend paused after answering and looked at the device, unsure whether it was listening or processing, so we added visible LISTENING and THINKING labels.
+- Plan confirmation: A friend wanted to change the suggested first step but was unsure whether saying a correction would replace the plan. We changed it to showing plan on screen, adding a button to request a change and reading the updated plan back before confirmation.
 
 ### What worked well about the system and what didn't?
 
